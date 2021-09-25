@@ -12,6 +12,17 @@ class LocalizationPicker {
     return EnumToString.fromString(Locales.values, value) ?? DEFAULT_LOCALE;
   }
 
+  static String displayValue(Locales locale) {
+    switch (locale) {
+      case Locales.Cyrilic:
+        return 'Latinica';
+      case Locales.Latinic:
+        return 'Cirilica';
+      default:
+        return 'Latinica';
+    }
+  }
+
   static Locale returnLocale(Locales? localization) {
     switch (localization) {
       case Locales.Latinic:
