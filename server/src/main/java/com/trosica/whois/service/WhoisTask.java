@@ -1,5 +1,6 @@
-package com.trosica.whois;
+package com.trosica.whois.service;
 
+import com.trosica.whois.api.WhoisDataM;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

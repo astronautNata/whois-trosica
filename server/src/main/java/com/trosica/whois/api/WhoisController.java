@@ -1,5 +1,6 @@
-package com.trosica.whois;
+package com.trosica.whois.api;
 
+import com.trosica.whois.service.WhoisExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;

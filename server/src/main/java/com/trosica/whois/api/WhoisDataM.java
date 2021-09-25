@@ -1,4 +1,4 @@
-package com.trosica.whois;
+package com.trosica.whois.api;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +16,8 @@ public class WhoisDataM {
 	private String registrar;
 	private String registrant;
 	private String address;
-	private String registrationDate;
-	private String expirationDate;
+	private Long registrationDate;
+	private Long expirationDate;
 
 	private List<String> nameservers;
 

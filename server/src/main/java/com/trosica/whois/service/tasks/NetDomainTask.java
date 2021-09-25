@@ -1,25 +1,29 @@
-package com.trosica.whois.tasks;
+package com.trosica.whois.service.tasks;
 
-import com.trosica.whois.CmdExecUtil;
-import com.trosica.whois.WhoisDataM;
-import com.trosica.whois.WhoisTask;
+import com.trosica.whois.utils.CmdExecUtil;
+import com.trosica.whois.api.WhoisDataM;
+import com.trosica.whois.service.WhoisTask;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrgDomainTask implements WhoisTask {
+public class NetDomainTask implements WhoisTask {
 
 	@Override
 	public List<String> getDomainNames() {
-		return List.of(".org", ".орг");
+		return Collections.singletonList(".net");
 	}
 
 	@Override
 	public String getServiceUrl() {
-		return "whois.publicinterestregistry.net";
+		return "whois.verisign-grs.com";
 	}
 
 	@Override
@@ -29,13 +33,14 @@ public class OrgDomainTask implements WhoisTask {
 
 		WhoisDataM data = new WhoisDataM();
 		for (String line : response.split("\n")) {
+			line = line.trim();
 			if (line.startsWith("Creation Date:")) {
-				data.setRegistrationDate(line.replace("Creation Date:", "")
-						.trim());
+				data.setRegistrationDate(convertToMillis(line.replace("Creation Date:", "")
+						.trim()));
 			}
 			if (line.startsWith("Registry Expiry Date:")) {
-				data.setExpirationDate(line.replace("Registry Expiry Date:", "")
-						.trim());
+				data.setExpirationDate(convertToMillis(line.replace("Registry Expiry Date:", "")
+						.trim()));
 			}
 			if (line.startsWith("Registrar:")) {
 				data.setRegistrar(line.replace("Registrar:", "")
@@ -45,8 +50,8 @@ public class OrgDomainTask implements WhoisTask {
 				data.setOwner(line.replace("Registrar Abuse Contact Email:", "")
 						.trim());
 			}
-			if (line.startsWith("Registrant:")) {
-				data.setRegistrant(line.replace("Registrant:", "")
+			if (line.startsWith("Registrant Organization:")) {
+				data.setRegistrant(line.replace("Registrant Organization:", "")
 						.trim());
 			}
 			if (line.startsWith("Name Server:")) {
@@ -58,5 +63,12 @@ public class OrgDomainTask implements WhoisTask {
 		data.setCompleteInfo(response);
 
 		return data;
+	}
+
+	@SneakyThrows
+	private long convertToMillis(String date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse(date.split("T")[0]);
+		return d.getTime();
 	}
 }

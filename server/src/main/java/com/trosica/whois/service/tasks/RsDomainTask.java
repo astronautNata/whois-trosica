@@ -1,11 +1,15 @@
-package com.trosica.whois.tasks;
+package com.trosica.whois.service.tasks;
 
-import com.trosica.whois.CmdExecUtil;
-import com.trosica.whois.WhoisDataM;
-import com.trosica.whois.WhoisTask;
+import com.trosica.whois.utils.CmdExecUtil;
+import com.trosica.whois.api.WhoisDataM;
+import com.trosica.whois.service.WhoisTask;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,7 +18,7 @@ public class RsDomainTask implements WhoisTask {
 
 	@Override
 	public List<String> getDomainNames() {
-		return List.of(".rs", ".срб", ".xn--90a3ac");
+		return Arrays.asList(".rs", ".срб", ".xn--90a3ac");
 	}
 
 	@Override
@@ -30,12 +34,12 @@ public class RsDomainTask implements WhoisTask {
 		WhoisDataM data = new WhoisDataM();
 		for (String line : response.split("\n")) {
 			if (line.startsWith("Registration date:")) {
-				data.setRegistrationDate(line.replace("Registration date:", "")
-						.trim());
+				data.setRegistrationDate(convertToMillis(line.replace("Registration date:", "")
+						.trim()));
 			}
 			if (line.startsWith("Expiration date:")) {
-				data.setExpirationDate(line.replace("Expiration date:", "")
-						.trim());
+				data.setExpirationDate(convertToMillis(line.replace("Expiration date:", "")
+						.trim()));
 			}
 			if (line.startsWith("Registrar:")) {
 				data.setRegistrar(line.replace("Registrar:", "")
@@ -62,5 +66,12 @@ public class RsDomainTask implements WhoisTask {
 		data.setCompleteInfo(response);
 
 		return data;
+	}
+
+	@SneakyThrows
+	private long convertToMillis(String date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		Date d = sdf.parse(date);
+		return d.getTime();
 	}
 }
