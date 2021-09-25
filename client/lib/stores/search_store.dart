@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:whois_trosica/models/Failure.dart';
 import 'package:whois_trosica/models/WhoisResponse.dart';
 import 'package:whois_trosica/services/network.dart';
 import 'package:whois_trosica/stores/error_store.dart';
@@ -46,8 +47,8 @@ abstract class SearchStoreBase with Store {
       searchFuture = ObservableFuture(future);
       whois = await future;
       _historyStore.addToHistory(whois!);
-    } catch (e) {
-      errorStore.errorMessage = 'Network error, try again later';
+    } on Failure catch (e) {
+      errorStore.errorMessage = e.message;
     }
   }
 }
