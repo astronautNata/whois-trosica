@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   final _pagesStore = PagesStore();
   late final PreferencesService _preferencesService;
   _MyAppState(this.sharedPreferences);
+
   @override
   void initState() {
     super.initState();
@@ -57,10 +58,13 @@ class _MyAppState extends State<MyApp> {
           create: (_) => ConnectivityStore(),
         ),
         ProxyProvider<PreferencesService, FavoritesStore>(
-            update: (_, preferencesService, __) => FavoritesStore(preferencesService)),
+            update: (_, preferencesService, __) =>
+                FavoritesStore(preferencesService)),
         ProxyProvider<PreferencesService, HistoryStore>(
-            update: (_, preferencesService, __) => HistoryStore(preferencesService)),
-        ProxyProvider<HistoryStore, SearchStore>(update: (_, historyStore, __) => SearchStore(historyStore)),
+            update: (_, preferencesService, __) =>
+                HistoryStore(preferencesService)),
+        ProxyProvider<HistoryStore, SearchStore>(
+            update: (_, historyStore, __) => SearchStore(historyStore)),
       ],
       child: TranslationProvider(
         child: MaterialApp(
@@ -68,7 +72,8 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(primarySwatch: Colors.blue),
           debugShowCheckedModeBanner: false,
           supportedLocales: LocaleSettings.supportedLocales,
-          locale: LocalizationPicker.returnLocale(_preferencesService.readPreferredLocalization),
+          locale: LocalizationPicker.returnLocale(
+              _preferencesService.readPreferredLocalization),
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -173,9 +178,11 @@ class PageContainer extends StatelessWidget {
             builder: (_, searchStore, connectivityStore, favoriteStore, __) =>
                 SearchPage(searchStore, connectivityStore, favoriteStore));
       case Pages.Favorite:
-        return Consumer<FavoritesStore>(builder: (_, favoriteStore, __) => FavoritePage(favoriteStore));
+        return Consumer<FavoritesStore>(
+            builder: (_, favoriteStore, __) => FavoritePage(favoriteStore));
       case Pages.History:
-        return Consumer<HistoryStore>(builder: (_, historyStore, __) => HistoryPage(historyStore));
+        return Consumer<HistoryStore>(
+            builder: (_, historyStore, __) => HistoryPage(historyStore));
       default:
         return Consumer3<SearchStore, ConnectivityStore, FavoritesStore>(
             builder: (_, searchStore, connectivityStore, favoriteStore, __) =>
