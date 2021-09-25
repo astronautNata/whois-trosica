@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
               body: SafeArea(
                 child: PageContainer(_pagesStore.selectedDestination),
               ),
-              bottomNavigationBar: AppBottomNavigationBar(_pagesStore),
+              //bottomNavigationBar: AppBottomNavigationBar(_pagesStore),
             ),
           ),
         ),
@@ -179,17 +179,23 @@ class PageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (destination) {
       case Pages.Home:
-        return Consumer3<SearchStore, ConnectivityStore, FavoritesStore>(
-            builder: (_, searchStore, connectivityStore, favoriteStore, __) =>
-                SearchPage(searchStore, connectivityStore, favoriteStore));
+        return Consumer4<SearchStore, ConnectivityStore, FavoritesStore,
+                HistoryStore>(
+            builder: (_, searchStore, connectivityStore, favoriteStore,
+                    historyStore, __) =>
+                SearchPage(searchStore, connectivityStore, favoriteStore,
+                    historyStore));
       case Pages.Favorite:
         return Consumer<FavoritesStore>(builder: (_, favoriteStore, __) => FavoritePage(favoriteStore));
       case Pages.History:
         return Consumer<HistoryStore>(builder: (_, historyStore, __) => HistoryPage(historyStore));
       default:
-        return Consumer3<SearchStore, ConnectivityStore, FavoritesStore>(
-            builder: (_, searchStore, connectivityStore, favoriteStore, __) =>
-                SearchPage(searchStore, connectivityStore, favoriteStore));
+        return Consumer4<SearchStore, ConnectivityStore, FavoritesStore,
+                HistoryStore>(
+            builder: (_, searchStore, connectivityStore, favoriteStore,
+                    historyStore, __) =>
+                SearchPage(searchStore, connectivityStore, favoriteStore,
+                    historyStore));
     }
   }
 }
