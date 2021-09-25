@@ -18,18 +18,55 @@ class WhoisResponseList {
 }
 
 class WhoisResponse {
-  String domen;
-  Map<String, dynamic> data;
+  String? domen;
+  String? owner;
+  String? registrar;
+  String? registrationDate;
+  String? expirationDate;
+  List<String>? nameservers;
+  String? completeInfo;
 
-  WhoisResponse({required this.data, required this.domen});
+  WhoisResponse({
+    required this.domen,
+    required this.owner,
+    required this.registrar,
+    required this.registrationDate,
+    required this.expirationDate,
+    required this.nameservers,
+    required this.completeInfo,
+  });
 
   factory WhoisResponse.fromJson(Map<String, dynamic> json, String domen) =>
-      WhoisResponse(data: json, domen: domen);
+      WhoisResponse(
+        domen: domen,
+        owner: json['owner'],
+        registrar: json['registrar'],
+        registrationDate: json['registrationDate'],
+        expirationDate: json['expirationDate'],
+        nameservers: json['nameservers'].cast<String>(),
+        completeInfo: json['completeInfo'],
+      );
 
   factory WhoisResponse.fromSharedJson(Map<String, dynamic> json) =>
-      WhoisResponse(data: json['data'], domen: json['domen']);
+      WhoisResponse(
+        domen: json['domen'],
+        owner: json['owner'],
+        registrar: json['registrar'],
+        registrationDate: json['registrationDate'],
+        expirationDate: json['expirationDate'],
+        nameservers: json['nameservers'].cast<String>(),
+        completeInfo: json['completeInfo'],
+      );
 
-  Map<String, dynamic> toJson() => {'domen': domen, 'data': data};
+  Map<String, dynamic> toJson() => {
+        'domen': domen,
+        'owner': owner,
+        'registrar': registrar,
+        'registrationDate': registrationDate,
+        'expirationDate': expirationDate,
+        'nameservers': nameservers,
+        'completeInfo': completeInfo,
+      };
 
   @override
   bool operator ==(o) => o is WhoisResponse && domen == o.domen;
