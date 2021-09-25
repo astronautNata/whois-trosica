@@ -10,14 +10,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
-  provider: ^5.0.0  
+  flutter_localizations: # add this
+    sdk: flutter
+  provider: ^5.0.0
+  translit: ^2.0.0
   mobx: ^2.0.1  
   flutter_mobx: ^2.0.0  
   shared_preferences: ^2.0.5
   dio: ^4.0.0
   connectivity_plus: ^1.0.0
   another_flushbar: ^1.10.17
+  enum_to_string: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +28,7 @@ dev_dependencies:
   pedantic: ^1.11.0
   build_runner: ^1.12.2
   mobx_codegen: ^2.0.1+2
+  fast_i18n: ^5.0.3
 
   
 flutter:
