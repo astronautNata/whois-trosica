@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Collections;
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({BadDomainException.class})
-	@ResponseStatus(NOT_FOUND)
+	@ResponseStatus(INTERNAL_SERVER_ERROR)
 	public Map<String, Object> handle(BadDomainException e) {
 		return Collections.singletonMap("message", "Domen nije nadjen");
 	}
