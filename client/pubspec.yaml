@@ -21,6 +21,7 @@ dependencies:
   connectivity_plus: ^1.0.0
   another_flushbar: ^1.10.17
   enum_to_string: ^2.0.1
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   flutter_test:
