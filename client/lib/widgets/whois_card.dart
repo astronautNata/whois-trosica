@@ -39,19 +39,14 @@ class WhoisCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            whois.domen,
+            '${whois.domen}',
             style: TextStyle(fontSize: 20),
           ),
-          ...whois.data['whois'].entries
-              .map(
-                (entry) => Text('${entry.key}: ${entry.value} '),
-              )
-              .toList(),
-          ...whois.data['dns'].entries
-              .map(
-                (entry) => Text('${entry.key}: ${entry.value} '),
-              )
-              .toList()
+          Text('${whois.owner}'),
+          Text('${whois.registrar}'),
+          Text('${whois.registrationDate}'),
+          Text('${whois.expirationDate}'),
+          Text('${whois.nameservers}'),
         ],
       ),
     );
