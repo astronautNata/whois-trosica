@@ -18,7 +18,7 @@ public class MkDomainTask implements WhoisTask {
 
 	@Override
 	public List<String> getDomainNames() {
-		return Arrays.asList(".mk", ".мкд");
+		return Arrays.asList(".mk", ".мкд", ".xn--d1alf");
 	}
 
 	@Override
