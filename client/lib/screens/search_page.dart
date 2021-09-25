@@ -8,15 +8,14 @@ import 'package:whois_trosica/stores/connectivity_store.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/stores/search_store.dart';
 import 'package:whois_trosica/widgets/whois_card.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 
 class SearchPage extends StatefulWidget {
   final searchStore;
   final connectivityStore;
   final favoriteStore;
 
-  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
-      {Key? key})
-      : super(key: key);
+  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore, {Key? key}) : super(key: key);
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -109,10 +108,9 @@ class _SearchPageState extends State<SearchPage> {
           TextField(
             controller: searchController,
             decoration: InputDecoration(
-              hintText: 'Enter a domen',
+              hintText: t.label_insert_domen,
               suffixIcon: IconButton(
-                onPressed: () =>
-                    searchStore.setDomen(searchController.value.text),
+                onPressed: () => searchStore.setDomen(searchController.value.text),
                 icon: Icon(Icons.search),
               ),
             ),
