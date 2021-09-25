@@ -1,5 +1,6 @@
 package com.trosica.whois.service;
 
+import com.trosica.whois.BadDomainException;
 import com.trosica.whois.api.WhoisDataM;
 import com.trosica.whois.service.tasks.DefaultDomainTask;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +20,19 @@ public class WhoisExecutor {
 
 		String punyDomain = IDN.toASCII(removeTrailingSlash(domain));
 
-		return tasks.stream()
+		WhoisDataM data = tasks.stream()
 				.filter(whoisService -> whoisService.getDomainNames()
 						.stream()
 						.anyMatch(punyDomain::endsWith))
 				.findFirst()
 				.map(whoisService -> whoisService.getWhois(punyDomain))
 				.orElse(defaultDomainTask.getWhois(punyDomain));
+
+		if (data.isNoData()) {
+			throw new BadDomainException();
+		}
+
+		return data;
 
 	}
 

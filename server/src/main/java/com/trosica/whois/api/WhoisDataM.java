@@ -3,6 +3,7 @@ package com.trosica.whois.api;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,15 @@ public class WhoisDataM {
 	public WhoisDataM() {
 		nameservers = new ArrayList<>();
 		registrar = "";
+	}
+
+	public boolean isNoData() {
+		return StringUtils.isEmpty(owner) &&
+				StringUtils.isEmpty(registrar) &&
+				StringUtils.isEmpty(registrant) &&
+				registrationDate == null &&
+				expirationDate == null;
+
 	}
 
 }
