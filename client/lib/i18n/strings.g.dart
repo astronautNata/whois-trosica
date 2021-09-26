@@ -3,9 +3,15 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
+<<<<<<< HEAD
  * Strings: 57 (19.0 per locale)
  * 
  * Built on 2021-09-26 at 16:36 UTC
+=======
+ * Strings: 60 (20.0 per locale)
+ * 
+ * Built on 2021-09-26 at 15:40 UTC
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
  */
 
 import 'package:flutter/widgets.dart';
@@ -270,8 +276,14 @@ class _StringsEn {
 	String get domain_owner => 'Vlasnik';
 	String get registration_date => 'Datum registrovanja';
 	String get expiration_date => 'Datum isteka';
+<<<<<<< HEAD
 	String get copied => 'Kopirano!';
 	String get raw_result => 'Prikaži kompletan rezultat';
+=======
+	String get no_internet_connection => 'Nema internet konekcije';
+	String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	String get bad_response => 'Unesite validan domen';
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -301,8 +313,14 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get domain_owner => 'Власник';
 	@override String get registration_date => 'Датум регистровања';
 	@override String get expiration_date => 'Датум истека';
+<<<<<<< HEAD
 	@override String get copied => 'Копирано!';
 	@override String get raw_result => 'Прикажи комплетан резултат';
+=======
+	@override String get no_internet_connection => 'Нема интернет конекције';
+	@override String get cannot_find_domain => 'Не можемо да пронађемо домен';
+	@override String get bad_response => 'Унесите валидан домен';
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 
 	/// A flat map containing all translations.
 	@override
@@ -333,8 +351,14 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get domain_owner => 'Vlasnik';
 	@override String get registration_date => 'Datum registrovanja';
 	@override String get expiration_date => 'Datum isteka';
+<<<<<<< HEAD
 	@override String get copied => 'Kopirano!';
 	@override String get raw_result => 'Prikaži kompletan rezultat';
+=======
+	@override String get no_internet_connection => 'Nema internet konekcije';
+	@override String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	@override String get bad_response => 'Unesite validan domen';
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 
 	/// A flat map containing all translations.
 	@override
@@ -364,8 +388,14 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+<<<<<<< HEAD
 		'copied': 'Kopirano!',
 		'raw_result': 'Prikaži kompletan rezultat',
+=======
+		'no_internet_connection': 'Nema internet konekcije',
+		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'bad_response': 'Unesite validan domen',
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -385,8 +415,14 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Власник',
 		'registration_date': 'Датум регистровања',
 		'expiration_date': 'Датум истека',
+<<<<<<< HEAD
 		'copied': 'Копирано!',
 		'raw_result': 'Прикажи комплетан резултат',
+=======
+		'no_internet_connection': 'Нема интернет конекције',
+		'cannot_find_domain': 'Не можемо да пронађемо домен',
+		'bad_response': 'Унесите валидан домен',
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -406,7 +442,13 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+<<<<<<< HEAD
 		'copied': 'Kopirano!',
 		'raw_result': 'Prikaži kompletan rezultat',
+=======
+		'no_internet_connection': 'Nema internet konekcije',
+		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'bad_response': 'Unesite validan domen',
+>>>>>>> 4c1917122dc45bb8213a54268e6841dee416a1d6
 	},
 };

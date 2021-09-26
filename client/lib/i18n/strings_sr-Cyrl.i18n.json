@@ -17,7 +17,8 @@
 "registration_date":"Датум регистровања",
 "expiration_date":"Датум истека",
 "copied": "Копирано!",
-"raw_result": "Прикажи комплетан резултат"
-
-
+"raw_result": "Прикажи комплетан резултат",
+"no_internet_connection":"Нема интернет конекције",
+"cannot_find_domain":"Не можемо да пронађемо домен",
+"bad_response":"Унесите валидан домен"
 }
