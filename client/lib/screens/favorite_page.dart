@@ -12,7 +12,7 @@ class FavoritePage extends StatelessWidget {
   const FavoritePage(this.store, this.pagesStore, {Key? key}) : super(key: key);
 
   Widget _buildBody(context) {
-    return SingleChildScrollView(child: _buildWhoiss(context));
+    return _buildWhoiss(context);
   }
 
   Widget _buildWhoiss(context) {
@@ -48,20 +48,19 @@ class FavoritePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                ...store.favoriteWhoiss
-                    .map(
-                      (element) => ResultCardWidget(
-                        whois: element,
-                        favClicked: () {
-                          store.toggleFavorite(element);
-                        },
-                      ),
-                    )
-                    .toList()
-              ],
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...store.favoriteWhoiss
+                      .map(
+                        (element) => ResultCardWidget(
+                          whois: element,
+                        ),
+                      )
+                      .toList()
+                ],
+              ),
             ),
           )
         ],

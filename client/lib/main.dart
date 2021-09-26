@@ -33,6 +33,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   final messaging = FirebaseMessaging.instance;
   prefsService.fbToken = await messaging.getToken();
+  LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(
+      prefsService.readPreferredLocalization));
 
   runApp(TranslationProvider(child: MyApp(sharedPreferences, prefsService)));
 }

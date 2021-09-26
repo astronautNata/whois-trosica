@@ -104,33 +104,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          Column(
-            children: [
-              _buildHeader(),
-              _buildAnimation(),
-              _buildDescription(),
-              _buildSearch(),
-              _buildNotValidDomainError(),
-              _buildHistory(),
-            ],
-          ),
-          Observer(builder: (context) {
-            if (searchStore.isWhoisLoading) {
-              return _showLoadingOverlay();
-            }
-
-            return Container();
-          })
-        ],
-      ),
-    );
-  }
-
   Widget _showLoadingOverlay() {
     return Stack(
       children: [
@@ -311,7 +284,9 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 absorbing: true,
                 child: Container(
                   color: const Color(0xFF000000).withOpacity(0.3),
-                  child: Center(child: Icon(Icons.signal_wifi_off)),
+                  padding: EdgeInsets.only(right: 16),
+                  alignment: Alignment.centerRight,
+                  child: Icon(Icons.signal_wifi_off),
                 ),
               ),
             )
@@ -354,6 +329,36 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             );
           })),
         ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                _buildHeader(),
+                _buildAnimation(),
+                _buildDescription(),
+                _buildSearch(),
+                _buildNotValidDomainError(),
+                _buildHistory(),
+              ],
+            ),
+            Observer(builder: (context) {
+              if (searchStore.isWhoisLoading) {
+                return _showLoadingOverlay();
+              }
+
+              return Container();
+            })
+          ],
+        ),
       ),
     );
   }

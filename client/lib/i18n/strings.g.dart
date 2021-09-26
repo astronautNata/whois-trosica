@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 51 (17.0 per locale)
+ * Strings: 57 (19.0 per locale)
  * 
- * Built on 2021-09-26 at 12:33 UTC
+ * Built on 2021-09-26 at 16:36 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -270,6 +270,8 @@ class _StringsEn {
 	String get domain_owner => 'Vlasnik';
 	String get registration_date => 'Datum registrovanja';
 	String get expiration_date => 'Datum isteka';
+	String get copied => 'Kopirano!';
+	String get raw_result => 'Prikaži kompletan rezultat';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -299,6 +301,8 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get domain_owner => 'Власник';
 	@override String get registration_date => 'Датум регистровања';
 	@override String get expiration_date => 'Датум истека';
+	@override String get copied => 'Копирано!';
+	@override String get raw_result => 'Прикажи комплетан резултат';
 
 	/// A flat map containing all translations.
 	@override
@@ -329,6 +333,8 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get domain_owner => 'Vlasnik';
 	@override String get registration_date => 'Datum registrovanja';
 	@override String get expiration_date => 'Datum isteka';
+	@override String get copied => 'Kopirano!';
+	@override String get raw_result => 'Prikaži kompletan rezultat';
 
 	/// A flat map containing all translations.
 	@override
@@ -358,6 +364,8 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+		'copied': 'Kopirano!',
+		'raw_result': 'Prikaži kompletan rezultat',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -377,6 +385,8 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Власник',
 		'registration_date': 'Датум регистровања',
 		'expiration_date': 'Датум истека',
+		'copied': 'Копирано!',
+		'raw_result': 'Прикажи комплетан резултат',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -396,5 +406,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+		'copied': 'Kopirano!',
+		'raw_result': 'Prikaži kompletan rezultat',
 	},
 };

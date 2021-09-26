@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/constants/enums.dart';
 import 'package:whois_trosica/i18n/strings.g.dart';
 import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/stores/search_store.dart';
@@ -51,7 +52,7 @@ class _ResultPageState extends State<ResultPage> {
           ),
           IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                widget.pages.selectPage(Pages.Home.index);
                 widget.store.setErrorVisibillity(false);
               },
               icon: Icon(
@@ -113,39 +114,51 @@ class _ResultPageState extends State<ResultPage> {
     var media = MediaQuery.of(context);
     var error = widget.store.errorStore.errorMessage.isNotEmpty;
 
-    return Observer(
-      builder: (context) {
-        return Scaffold(
-          body: Container(
-            color: ColorsHelper.backgroundColor,
-            child: SingleChildScrollView(
-                child: Column(children: [
-              Container(color: Colors.white, height: media.padding.top),
-              _buildAppBar(widget.store),
-              if (error) const SizedBox(height: 80),
-              _buildDomenTitle(widget.store),
-              if (!error && widget.store.whois != null)
-                ResultCardWidget(
-                  whois: widget.store.whois!,
-                  favClicked: () {},
-                ),
-              if (error)
-                Container(
-                  transform: Matrix4.translationValues(0.0, -160.0, 0.0),
-                  child: Transform.scale(
-                    scale: 1.8,
-                    child: Lottie.asset(
-                      Assets.error,
-                      repeat: false,
-                      width: double.infinity,
-                      height: 500,
-                    ),
-                  ),
-                ),
-            ])),
-          ),
-        );
+    return WillPopScope(
+      onWillPop: () async {
+        widget.pages.selectPage(Pages.Home.index);
+        return false;
       },
+      child: Observer(
+        builder: (context) {
+          return Scaffold(
+            body: Container(
+              color: ColorsHelper.backgroundColor,
+              child: Column(
+                children: [
+                  Container(color: Colors.white, height: media.padding.top),
+                  _buildAppBar(widget.store),
+                  if (error) const SizedBox(height: 80),
+                  _buildDomenTitle(widget.store),
+                  Expanded(
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                      if (!error && widget.store.whois != null)
+                        ResultCardWidget(
+                          whois: widget.store.whois!,
+                        ),
+                      if (error)
+                        Container(
+                          transform:
+                              Matrix4.translationValues(0.0, -160.0, 0.0),
+                          child: Transform.scale(
+                            scale: 1.8,
+                            child: Lottie.asset(
+                              Assets.error,
+                              repeat: false,
+                              width: double.infinity,
+                              height: 500,
+                            ),
+                          ),
+                        ),
+                    ])),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

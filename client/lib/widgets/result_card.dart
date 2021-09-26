@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -9,10 +10,16 @@ import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/widgets/alert_bottom_sheet.dart';
 import 'package:whois_trosica/widgets/heart.dart';
 
-class ResultCardWidget extends StatelessWidget {
+class ResultCardWidget extends StatefulWidget {
   final WhoisResponse whois;
-  final VoidCallback favClicked;
-  const ResultCardWidget({Key? key, required this.whois, required this.favClicked}) : super(key: key);
+  const ResultCardWidget({Key? key, required this.whois}) : super(key: key);
+
+  @override
+  _ResultCardWidgetState createState() => _ResultCardWidgetState();
+}
+
+class _ResultCardWidgetState extends State<ResultCardWidget> {
+  bool rawOpened = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +27,6 @@ class ResultCardWidget extends StatelessWidget {
       return Divider(
         color: ColorsHelper.dividerColor,
         thickness: 1,
-        height: 30,
-        indent: 20,
-        endIndent: 20,
       );
     }
 
@@ -32,15 +36,18 @@ class ResultCardWidget extends StatelessWidget {
       return Observer(
         builder: (context) {
           var favoriteStore = Provider.of<FavoritesStore>(context);
-          var favorited = favoriteStore.containsFavorite(whois);
+          var favorited = favoriteStore.containsFavorite(widget.whois);
           return Container(
             padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  whois.domen ?? '',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ColorsHelper.darkTextColor),
+                  widget.whois.domen ?? '',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: ColorsHelper.darkTextColor),
                 ),
                 Row(
                   children: [
@@ -48,7 +55,8 @@ class ResultCardWidget extends StatelessWidget {
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
-                            backgroundColor: ColorsHelper.bottomSheetOverlayBackground,
+                            backgroundColor:
+                                ColorsHelper.bottomSheetOverlayBackground,
                             builder: (context) {
                               return AlertBottomSheet(onAlertTurn);
                             },
@@ -63,7 +71,7 @@ class ResultCardWidget extends StatelessWidget {
                     ),
                     Heart(
                       favorited: favorited,
-                      onClick: () => favoriteStore.toggleFavorite(whois),
+                      onClick: () => favoriteStore.toggleFavorite(widget.whois),
                     ),
                   ],
                 )
@@ -74,26 +82,138 @@ class ResultCardWidget extends StatelessWidget {
       );
     }
 
-    Widget _buildSubtitleContent(String title, String? subtitle) {
+    Widget _buildSubtitleContent(String title, String? subtitle,
+        [bool showDivider = true]) {
       return Padding(
-        padding: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.only(bottom: 16, left: 16, right: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              textAlign: TextAlign.left,
-              style:
-                  TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.iconColor.withOpacity(0.7)),
+            Padding(
+              padding: EdgeInsets.only(left: 18, right: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: ColorsHelper.iconColor.withOpacity(0.7),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    subtitle ?? '',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: ColorsHelper.darkTextColor,
+                    ),
+                  )
+                ],
+              ),
             ),
-            SizedBox(
-              height: 5,
+            if (showDivider) const SizedBox(height: 16),
+            if (showDivider)
+              Container(
+                color: ColorsHelper.dividerColor,
+                height: 1,
+                width: double.infinity,
+              ),
+          ],
+        ),
+      );
+    }
+
+    Widget _buildRawResponseMenu() {
+      return Container(
+        padding: EdgeInsets.only(top: 20, bottom: 20, left: 16, right: 16),
+        color: ColorsHelper.borderColor.withOpacity(0.6),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 18, right: 18),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    t.raw_result,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: ColorsHelper.iconColor,
+                    ),
+                  ),
+                  Spacer(),
+                  if (rawOpened)
+                    GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(
+                            ClipboardData(text: widget.whois.completeInfo));
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text(t.copied)));
+                      },
+                      child: Icon(
+                        Icons.copy,
+                        color: ColorsHelper.iconColor,
+                      ),
+                    ),
+                  if (rawOpened) SizedBox(width: 18),
+                  if (rawOpened)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          rawOpened = false;
+                        });
+                      },
+                      child: Icon(
+                        Icons.keyboard_arrow_up,
+                        color: ColorsHelper.iconColor,
+                      ),
+                    ),
+                  if (!rawOpened)
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          rawOpened = true;
+                        });
+                      },
+                      child: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: ColorsHelper.iconColor,
+                      ),
+                    )
+                ],
+              ),
             ),
-            Text(
-              subtitle ?? '',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.darkTextColor),
-            )
+          ],
+        ),
+      );
+    }
+
+    Widget _buildRawResponse() {
+      return Container(
+        padding: EdgeInsets.only(top: 8, bottom: 20),
+        color: ColorsHelper.borderColor.withOpacity(0.3),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 18, right: 18),
+              child: Text(
+                widget.whois.completeInfo ?? '',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: ColorsHelper.iconColor,
+                ),
+              ),
+            ),
           ],
         ),
       );
@@ -101,41 +221,27 @@ class ResultCardWidget extends StatelessWidget {
 
     Widget _buildContent() {
       return Container(
-        padding: EdgeInsets.fromLTRB(30, 10, 60, 10),
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildSubtitleContent(t.domain_owner, whois.owner),
-                      _buildSubtitleContent(t.registration_date, whois.registrationDate.toString()),
-                      _buildSubtitleContent(t.expiration_date, whois.expirationDate.toString()),
-                    ],
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildSubtitleContent(
-                          'Name servers',
-                          whois.nameservers
-                              ?.fold<String>('', (previousValue, element) => '$previousValue\n${element.trim()}')
-                              .trim())
-                    ],
-                  ),
-                )
-              ],
-            ),
+            _buildSubtitleContent(t.domain_owner, widget.whois.owner),
+            _buildSubtitleContent(
+                t.registration_date, widget.whois.registrationDate.toString()),
+            _buildSubtitleContent(
+                t.expiration_date, widget.whois.expirationDate.toString()),
+            _buildSubtitleContent(
+                'Name servers',
+                widget.whois.nameservers
+                    ?.fold<String>(
+                        '',
+                        (previousValue, element) =>
+                            '$previousValue\n${element.trim()}')
+                    .trim(),
+                false),
+            _buildRawResponseMenu(),
+            if (rawOpened) _buildRawResponse()
           ],
         ),
       );

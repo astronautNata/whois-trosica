@@ -15,5 +15,9 @@
 "favorite_domains":"Омиљени домени",
 "domain_owner":"Власник",
 "registration_date":"Датум регистровања",
-"expiration_date":"Датум истека"
+"expiration_date":"Датум истека",
+"copied": "Копирано!",
+"raw_result": "Прикажи комплетан резултат"
+
+
 }
