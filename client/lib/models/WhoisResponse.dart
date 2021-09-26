@@ -21,8 +21,8 @@ class WhoisResponse {
   String? domen;
   String? owner;
   String? registrar;
-  String? registrationDate;
-  String? expirationDate;
+  DateTime? registrationDate;
+  DateTime? expirationDate;
   List<String>? nameservers;
   String? completeInfo;
 
@@ -41,8 +41,10 @@ class WhoisResponse {
         domen: domen,
         owner: json['owner'],
         registrar: json['registrar'],
-        registrationDate: json['registrationDate'],
-        expirationDate: json['expirationDate'],
+        registrationDate:
+            DateTime.fromMillisecondsSinceEpoch(json['registrationDate']),
+        expirationDate:
+            DateTime.fromMillisecondsSinceEpoch(json['expirationDate']),
         nameservers: json['nameservers'].cast<String>(),
         completeInfo: json['completeInfo'],
       );
@@ -52,8 +54,10 @@ class WhoisResponse {
         domen: json['domen'],
         owner: json['owner'],
         registrar: json['registrar'],
-        registrationDate: json['registrationDate'],
-        expirationDate: json['expirationDate'],
+        registrationDate: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(json['registrationDate'])),
+        expirationDate: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(json['expirationDate'])),
         nameservers: json['nameservers'].cast<String>(),
         completeInfo: json['completeInfo'],
       );
@@ -62,8 +66,8 @@ class WhoisResponse {
         'domen': domen,
         'owner': owner,
         'registrar': registrar,
-        'registrationDate': registrationDate,
-        'expirationDate': expirationDate,
+        'registrationDate': registrationDate?.millisecondsSinceEpoch.toString(),
+        'expirationDate': expirationDate?.microsecondsSinceEpoch.toString(),
         'nameservers': nameservers,
         'completeInfo': completeInfo,
       };

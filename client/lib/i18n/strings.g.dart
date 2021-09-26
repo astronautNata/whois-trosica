@@ -2,10 +2,10 @@
 /*
  * Generated file. Do not edit.
  * 
- * Locales: 2
- * Strings: 8 (4.0 per locale)
+ * Locales: 3
+ * Strings: 24 (8.0 per locale)
  * 
- * Built on 2021-09-25 at 10:56 UTC
+ * Built on 2021-09-25 at 21:58 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -21,7 +21,8 @@ AppLocale _currLocale = _baseLocale;
 /// - if (LocaleSettings.currentLocale == AppLocale.en) // locale check
 enum AppLocale {
 	en, // 'en' (base locale, fallback)
-	sr, // 'sr'
+	srCyrl, // 'sr-Cyrl'
+	srLatn, // 'sr-Latn'
 }
 
 /// Method A: Simple
@@ -135,21 +136,24 @@ extension AppLocaleExtensions on AppLocale {
 	_StringsEn get translations {
 		switch (this) {
 			case AppLocale.en: return _StringsEn._instance;
-			case AppLocale.sr: return _StringsSr._instance;
+			case AppLocale.srCyrl: return _StringsSrCyrl._instance;
+			case AppLocale.srLatn: return _StringsSrLatn._instance;
 		}
 	}
 
 	String get languageTag {
 		switch (this) {
 			case AppLocale.en: return 'en';
-			case AppLocale.sr: return 'sr';
+			case AppLocale.srCyrl: return 'sr-Cyrl';
+			case AppLocale.srLatn: return 'sr-Latn';
 		}
 	}
 
 	Locale get flutterLocale {
 		switch (this) {
 			case AppLocale.en: return const Locale.fromSubtags(languageCode: 'en');
-			case AppLocale.sr: return const Locale.fromSubtags(languageCode: 'sr');
+			case AppLocale.srCyrl: return const Locale.fromSubtags(languageCode: 'sr', scriptCode: 'Cyrl', );
+			case AppLocale.srLatn: return const Locale.fromSubtags(languageCode: 'sr', scriptCode: 'Latn', );
 		}
 	}
 }
@@ -158,7 +162,8 @@ extension StringAppLocaleExtensions on String {
 	AppLocale? toAppLocale() {
 		switch (this) {
 			case 'en': return AppLocale.en;
-			case 'sr': return AppLocale.sr;
+			case 'sr-Cyrl': return AppLocale.srCyrl;
+			case 'sr-Latn': return AppLocale.srLatn;
 			default: return null;
 		}
 	}
@@ -252,6 +257,10 @@ class _StringsEn {
 	String get label_history => 'Istorija';
 	String get label_favorite => 'Omiljeno';
 	String get label_insert_domen => 'Unesite domen';
+	String get home_title1 => 'Pretrazi i upravljaj ';
+	String get home_title2 => 'domacim domenima';
+	String get home_last_search => 'POSLEDNJE PRETRAGE';
+	String get enter_domain => 'Unesi domen ovde';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -259,20 +268,45 @@ class _StringsEn {
 	}
 }
 
-class _StringsSr implements _StringsEn {
-	_StringsSr._(); // no constructor
+class _StringsSrCyrl implements _StringsEn {
+	_StringsSrCyrl._(); // no constructor
 
-	static final _StringsSr _instance = _StringsSr._();
+	static final _StringsSrCyrl _instance = _StringsSrCyrl._();
 
 	@override String get label_search => 'Претрага';
 	@override String get label_history => 'Историја';
 	@override String get label_favorite => 'Омиљено';
 	@override String get label_insert_domen => 'Унесите домен';
+	@override String get home_title1 => 'Претражи и управљај ';
+	@override String get home_title2 => 'домаћим доменима';
+	@override String get home_last_search => 'ПОСЛЕДЊЕ ПРЕТРАГЕ';
+	@override String get enter_domain => 'Унеси домен овде';
 
 	/// A flat map containing all translations.
 	@override
 	dynamic operator[](String key) {
-		return _translationMap[AppLocale.sr]![key];
+		return _translationMap[AppLocale.srCyrl]![key];
+	}
+}
+
+class _StringsSrLatn implements _StringsEn {
+	_StringsSrLatn._(); // no constructor
+
+	static final _StringsSrLatn _instance = _StringsSrLatn._();
+
+	@override String get label_search => 'Pretraga';
+	@override String get label_history => 'Istorija';
+	@override String get label_favorite => 'Omiljeno';
+	@override String get label_insert_domen => 'Unesite domen';
+	@override String get home_title1 => 'Pretrazi i upravljaj ';
+	@override String get home_title2 => 'domacim domenima';
+	@override String get home_last_search => 'POSLEDNJE PRETRAGE';
+	@override String get enter_domain => 'Unesi domen ovde';
+
+	/// A flat map containing all translations.
+	@override
+	dynamic operator[](String key) {
+		return _translationMap[AppLocale.srLatn]![key];
 	}
 }
 
@@ -284,11 +318,29 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'label_history': 'Istorija',
 		'label_favorite': 'Omiljeno',
 		'label_insert_domen': 'Unesite domen',
+		'home_title1': 'Pretrazi i upravljaj ',
+		'home_title2': 'domacim domenima',
+		'home_last_search': 'POSLEDNJE PRETRAGE',
+		'enter_domain': 'Unesi domen ovde',
 	},
-	AppLocale.sr: {
+	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
 		'label_history': 'Историја',
 		'label_favorite': 'Омиљено',
 		'label_insert_domen': 'Унесите домен',
+		'home_title1': 'Претражи и управљај ',
+		'home_title2': 'домаћим доменима',
+		'home_last_search': 'ПОСЛЕДЊЕ ПРЕТРАГЕ',
+		'enter_domain': 'Унеси домен овде',
+	},
+	AppLocale.srLatn: {
+		'label_search': 'Pretraga',
+		'label_history': 'Istorija',
+		'label_favorite': 'Omiljeno',
+		'label_insert_domen': 'Unesite domen',
+		'home_title1': 'Pretrazi i upravljaj ',
+		'home_title2': 'domacim domenima',
+		'home_last_search': 'POSLEDNJE PRETRAGE',
+		'enter_domain': 'Unesi domen ovde',
 	},
 };

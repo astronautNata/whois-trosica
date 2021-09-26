@@ -77,25 +77,18 @@ mixin _$SearchStore on SearchStoreBase, Store {
     });
   }
 
+  final _$setDomenAsyncAction = AsyncAction('SearchStoreBase.setDomen');
+
+  @override
+  Future<void> setDomen(String text) {
+    return _$setDomenAsyncAction.run(() => super.setDomen(text));
+  }
+
   final _$searchAsyncAction = AsyncAction('SearchStoreBase.search');
 
   @override
   Future<void> search() {
     return _$searchAsyncAction.run(() => super.search());
-  }
-
-  final _$SearchStoreBaseActionController =
-      ActionController(name: 'SearchStoreBase');
-
-  @override
-  void setDomen(String text) {
-    final _$actionInfo = _$SearchStoreBaseActionController.startAction(
-        name: 'SearchStoreBase.setDomen');
-    try {
-      return super.setDomen(text);
-    } finally {
-      _$SearchStoreBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override

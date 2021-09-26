@@ -45,11 +45,11 @@ mixin _$ErrorStore on _ErrorStore, Store {
   }
 
   @override
-  void reset(String value) {
+  void reset() {
     final _$actionInfo =
         _$_ErrorStoreActionController.startAction(name: '_ErrorStore.reset');
     try {
-      return super.reset(value);
+      return super.reset();
     } finally {
       _$_ErrorStoreActionController.endAction(_$actionInfo);
     }

@@ -18,13 +18,20 @@ abstract class FavoritesStoreBase with Store {
   ObservableList<WhoisResponse> favoriteWhoiss = ObservableList.of([]);
 
   @action
-  void addToFavorite(WhoisResponse whois) {
+  void toggleFavorite(WhoisResponse whois) {
+    if (containsFavorite(whois)) {
+      _removeFromFavorite(whois);
+    } else {
+      _addToFavorite(whois);
+    }
+  }
+
+  void _addToFavorite(WhoisResponse whois) {
     favoriteWhoiss.add(whois);
     _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
   }
 
-  @action
-  void removeFromFavorite(WhoisResponse whois) {
+  void _removeFromFavorite(WhoisResponse whois) {
     favoriteWhoiss.remove(whois);
     _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
   }
