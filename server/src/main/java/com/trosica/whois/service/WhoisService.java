@@ -3,6 +3,7 @@ package com.trosica.whois.service;
 import com.trosica.whois.dao.Subscription;
 import com.trosica.whois.dao.SubscriptionsRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,12 +51,20 @@ public class WhoisService {
 
 			if (subscription.getExpirationDate() > currentTime) {
 				String message = String.format("Domain %s will expire soon.", subscription.getDomain());
-				firebaseService.sendNotification(subscription.getToken(), message);
-				mailService.sendMail(subscription.getEmail(), message, "WHOIS - Domain will expire soon");
+				if (StringUtils.isNotEmpty(subscription.getToken())) {
+					firebaseService.sendNotification(subscription.getToken(), message);
+				}
+				if (StringUtils.isNotEmpty(subscription.getEmail())) {
+					mailService.sendMail(subscription.getEmail(), message, "WHOIS - Domain will expire soon");
+				}
 			} else {
 				String message = String.format("Domain %s has expired.", subscription.getDomain());
-				firebaseService.sendNotification(subscription.getToken(), message);
-				mailService.sendMail(subscription.getEmail(), message, "WHOIS - Domain has expired");
+				if (StringUtils.isNotEmpty(subscription.getToken())) {
+					firebaseService.sendNotification(subscription.getToken(), message);
+				}
+				if (StringUtils.isNotEmpty(subscription.getEmail())) {
+					mailService.sendMail(subscription.getEmail(), message, "WHOIS - Domain has expired");
+				}
 			}
 
 			subscription.setLastNotified(currentTime);
