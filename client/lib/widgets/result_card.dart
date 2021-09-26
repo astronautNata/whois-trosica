@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/models/WhoisResponse.dart';
+import 'package:whois_trosica/stores/favorites_store.dart';
+import 'package:whois_trosica/widgets/heart.dart';
 
 class ResultCardWidget extends StatelessWidget {
-  const ResultCardWidget({Key? key}) : super(key: key);
+  final WhoisResponse whois;
+  final VoidCallback favClicked;
+  const ResultCardWidget(
+      {Key? key, required this.whois, required this.favClicked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,40 +27,47 @@ class ResultCardWidget extends StatelessWidget {
     }
 
     Widget _buildTitle() {
-      return Container(
-        padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'donesi.rs',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ColorsHelper.darkTextColor),
-            ),
-            Row(
+      return Observer(
+        builder: (context) {
+          var favoriteStore = Provider.of<FavoritesStore>(context);
+          var favorited = favoriteStore.containsFavorite(whois);
+          return Container(
+            padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      FontAwesomeIcons.bell,
-                      color: ColorsHelper.iconColor,
-                    )),
-                SizedBox(
-                  width: 20,
+                Text(
+                  whois.domen ?? '',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: ColorsHelper.darkTextColor),
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      FontAwesomeIcons.heart,
-                      color: ColorsHelper.iconColor,
-                    )),
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          FontAwesomeIcons.bell,
+                          color: ColorsHelper.iconColor,
+                        )),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Heart(
+                      favorited: favorited,
+                      onClick: () => favoriteStore.toggleFavorite(whois),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          );
+        },
       );
     }
 
-    Widget _buildSubtitleContent(String title, String subtitle) {
+    Widget _buildSubtitleContent(String title, String? subtitle) {
       return Padding(
         padding: EdgeInsets.only(bottom: 20),
         child: Column(
@@ -60,16 +76,21 @@ class ResultCardWidget extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.left,
-              style:
-                  TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.iconColor.withOpacity(0.7)),
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: ColorsHelper.iconColor.withOpacity(0.7)),
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              subtitle,
+              subtitle ?? '',
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.darkTextColor),
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: ColorsHelper.darkTextColor),
             )
           ],
         ),
@@ -80,31 +101,44 @@ class ResultCardWidget extends StatelessWidget {
       return Container(
         padding: EdgeInsets.fromLTRB(30, 10, 60, 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildSubtitleContent('Vlasnik', 'Zeljko Kosovac'),
-                    _buildSubtitleContent('Start', 'long'),
-                    _buildSubtitleContent('Name servers', '[ns1,ns2]'),
-                    _buildSubtitleContent('dnsRecords', '[r1,r2]'),
-                  ],
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSubtitleContent('Vlasnik', whois.owner),
+                      _buildSubtitleContent('Datum registrovanja',
+                          whois.registrationDate.toString()),
+                      _buildSubtitleContent(
+                          'Datum isteka', whois.expirationDate.toString()),
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildSubtitleContent('Datum registrovanja', '23/10/2020'),
-                    _buildSubtitleContent('End', 'long'),
-                    _buildSubtitleContent('ipAdress', '[ip1,ip2]'),
-                    _buildSubtitleContent('', ''),
-                  ],
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSubtitleContent(
+                          'Name servers',
+                          whois.nameservers
+                              ?.fold<String>(
+                                  '',
+                                  (previousValue, element) =>
+                                      '$previousValue\n${element.trim()}')
+                              .trim())
+                    ],
+                  ),
                 )
               ],
-            )
+            ),
           ],
         ),
       );

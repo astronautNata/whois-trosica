@@ -28,22 +28,11 @@ mixin _$HistoryStore on HistoryStoreBase, Store {
       ActionController(name: 'HistoryStoreBase');
 
   @override
-  void addToHistory(WhoisResponse whois) {
+  void toggleHistory(WhoisResponse whois) {
     final _$actionInfo = _$HistoryStoreBaseActionController.startAction(
-        name: 'HistoryStoreBase.addToHistory');
+        name: 'HistoryStoreBase.toggleHistory');
     try {
-      return super.addToHistory(whois);
-    } finally {
-      _$HistoryStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void removeFromHistory(WhoisResponse whois) {
-    final _$actionInfo = _$HistoryStoreBaseActionController.startAction(
-        name: 'HistoryStoreBase.removeFromHistory');
-    try {
-      return super.removeFromHistory(whois);
+      return super.toggleHistory(whois);
     } finally {
       _$HistoryStoreBaseActionController.endAction(_$actionInfo);
     }

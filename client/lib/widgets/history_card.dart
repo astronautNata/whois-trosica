@@ -33,9 +33,12 @@ class HistoryCard extends StatelessWidget {
           Spacer(),
           Transform.rotate(
             angle: 0.9,
-            child: Icon(
-              Icons.arrow_upward_outlined,
-              color: ColorsHelper.iconColor,
+            child: GestureDetector(
+              onTap: onClick,
+              child: Icon(
+                Icons.arrow_upward_outlined,
+                color: ColorsHelper.iconColor,
+              ),
             ),
           )
         ],

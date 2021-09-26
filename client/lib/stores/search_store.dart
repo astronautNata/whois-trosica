@@ -31,22 +31,23 @@ abstract class SearchStoreBase with Store {
   WhoisResponse? whois;
 
   @action
-  void setDomen(String text) {
+  Future<void> setDomen(String text) async {
     if (text == domen) return;
     domen = text;
-    search();
+    await search();
   }
 
   @action
   Future<void> search() async {
     if (domen == null) return;
 
+    errorStore.reset();
     final future = Network.instance.getWhois(domen: domen!);
 
     try {
       searchFuture = ObservableFuture(future);
       whois = await future;
-      _historyStore.addToHistory(whois!);
+      _historyStore.toggleHistory(whois!);
     } on Failure catch (e) {
       errorStore.errorMessage = e.message;
     }

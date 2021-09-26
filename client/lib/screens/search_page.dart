@@ -3,16 +3,23 @@ import 'dart:async';
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mobx/mobx.dart';
 import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/constants/enums.dart';
 import 'package:whois_trosica/constants/font.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
+import 'package:whois_trosica/services/localization.dart';
 import 'package:whois_trosica/stores/connectivity_store.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/stores/history_store.dart';
+import 'package:whois_trosica/stores/language_store.dart';
+import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/stores/search_store.dart';
 import 'package:whois_trosica/widgets/history_card.dart';
+import 'package:whois_trosica/widgets/locale_dropdown.dart';
 import 'package:whois_trosica/widgets/search_box.dart';
 
 class SearchPage extends StatefulWidget {
@@ -20,9 +27,11 @@ class SearchPage extends StatefulWidget {
   final connectivityStore;
   final favoriteStore;
   final historyStore;
+  final languageStore;
+  final pagesStore;
 
   SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
-      this.historyStore,
+      this.historyStore, this.languageStore, this.pagesStore,
       {Key? key})
       : super(key: key);
 
@@ -37,6 +46,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   late HistoryStore historyStore;
   late ConnectivityStore connStore;
   late FavoritesStore favStore;
+  late LanguageStore languageStore;
+  late PagesStore pagesStore;
   late TextEditingController searchController;
   ReactionDisposer? _disposer;
 
@@ -47,6 +58,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     connStore = widget.connectivityStore;
     favStore = widget.favoriteStore;
     historyStore = widget.historyStore;
+    languageStore = widget.languageStore;
+    pagesStore = widget.pagesStore;
     searchController = TextEditingController(text: searchStore.domen);
 
     _disposer = reaction<bool>((_) => connStore.isConnected, (connected) {
@@ -90,29 +103,76 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildAnimation(),
-        _buildDescription(),
-        _buildSearch(),
-        _buildHistory(),
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          _buildHeader(),
+          _buildAnimation(),
+          _buildDescription(),
+          _buildSearch(),
+          _buildHistory(),
+        ],
+      ),
     );
   }
 
+  Widget _buildHeader() {
+    return Observer(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 24.0, right: 10),
+        child: Row(
+          children: [
+            LocaleDropDown(
+              onLocaleChange: (value) {
+                languageStore.changeLanguage(value);
+                LocaleSettings.setLocale(
+                    LocalizationPicker.returnAppLocale(languageStore.locale));
+              },
+              curentValue: languageStore.locale,
+            ),
+            Spacer(),
+            Container(
+              height: 56,
+              width: 56,
+              child: Icon(
+                FontAwesomeIcons.bell,
+                color: ColorsHelper.iconColor,
+                size: 24,
+              ),
+            ),
+            Container(
+              height: 56,
+              width: 56,
+              child: GestureDetector(
+                onTap: () => pagesStore.selectPage(Pages.Favorite.index),
+                child: Icon(
+                  FontAwesomeIcons.heart,
+                  color: ColorsHelper.iconColor,
+                  size: 24,
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    });
+  }
+
   Widget _buildDescription() {
+    final t = Translations.of(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Pretrazi i upravljaj ',
+          t.home_title1,
           style: Font.heading1.copyWith(color: ColorsHelper.lightTextColor),
         ),
         Container(
           padding: EdgeInsets.all(4),
           color: ColorsHelper.greenBackground,
           child: Text(
-            'domacim domenima',
+            t.home_title2,
             style: Font.heading1.copyWith(color: ColorsHelper.darkTextColor),
           ),
         ),
@@ -170,7 +230,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildSearchForm() {
     return Container(
-      child: SearchBox((value) => searchStore.setDomen(value)),
+      child: SearchBox(
+        (value) async => {
+          await searchStore.setDomen(value),
+          pagesStore.selectPage(Pages.Result.index)
+        },
+      ),
     );
   }
 
@@ -191,6 +256,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   }
 
   Widget _buildHistory() {
+    final t = Translations.of(context);
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,7 +265,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
-              'POSLEDNJE PRETRAGE',
+              t.home_last_search,
               style: Font.caption3.copyWith(color: ColorsHelper.iconColor),
             ),
           ),
@@ -211,7 +278,14 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               ),
               itemCount: historyStore.historyWhoiss.length,
               itemBuilder: (context, index) {
-                return HistoryCard(whois: historyStore.historyWhoiss[index]);
+                return HistoryCard(
+                  whois: historyStore.historyWhoiss[index],
+                  onClick: () async {
+                    await searchStore
+                        .setDomen(historyStore.historyWhoiss[index].domen!);
+                    pagesStore.selectPage(Pages.Result.index);
+                  },
+                );
               },
             );
           })),

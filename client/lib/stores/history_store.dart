@@ -18,13 +18,19 @@ abstract class HistoryStoreBase with Store {
   ObservableList<WhoisResponse> historyWhoiss = ObservableList.of([]);
 
   @action
-  void addToHistory(WhoisResponse whois) {
+  void toggleHistory(WhoisResponse whois) {
+    if (containsHistory(whois)) {
+      _removeFromHistory(whois);
+    }
+    _addToHistory(whois);
+  }
+
+  void _addToHistory(WhoisResponse whois) {
     historyWhoiss.add(whois);
     _preferencesService.saveListOfHistoryWhoiss = historyWhoiss;
   }
 
-  @action
-  void removeFromHistory(WhoisResponse whois) {
+  void _removeFromHistory(WhoisResponse whois) {
     historyWhoiss.remove(whois);
     _preferencesService.saveListOfHistoryWhoiss = historyWhoiss;
   }

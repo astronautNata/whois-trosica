@@ -28,22 +28,11 @@ mixin _$FavoritesStore on FavoritesStoreBase, Store {
       ActionController(name: 'FavoritesStoreBase');
 
   @override
-  void addToFavorite(WhoisResponse whois) {
+  void toggleFavorite(WhoisResponse whois) {
     final _$actionInfo = _$FavoritesStoreBaseActionController.startAction(
-        name: 'FavoritesStoreBase.addToFavorite');
+        name: 'FavoritesStoreBase.toggleFavorite');
     try {
-      return super.addToFavorite(whois);
-    } finally {
-      _$FavoritesStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void removeFromFavorite(WhoisResponse whois) {
-    final _$actionInfo = _$FavoritesStoreBaseActionController.startAction(
-        name: 'FavoritesStoreBase.removeFromFavorite');
-    try {
-      return super.removeFromFavorite(whois);
+      return super.toggleFavorite(whois);
     } finally {
       _$FavoritesStoreBaseActionController.endAction(_$actionInfo);
     }
