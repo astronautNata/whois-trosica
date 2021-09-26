@@ -184,20 +184,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildAnimation() {
+  Widget _buildImage() {
     return Container(
       padding: EdgeInsets.only(top: 24, right: 97, left: 97, bottom: 34),
-      child: Lottie.asset(
-        Assets.domain,
-        repeat: false,
-        controller: _controller,
-        onLoaded: (composition) {
-          setState(() {
-            _controller.duration = composition.duration;
-            _controller.forward();
-          });
-        },
-      ),
+      child: Image.asset('assets/images/domain_image.png'),
     );
   }
 
@@ -338,7 +328,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             Column(
               children: [
                 _buildHeader(),
-                _buildAnimation(),
+                _buildImage(),
                 _buildDescription(),
                 _buildSearch(),
                 _buildNotValidDomainError(),
