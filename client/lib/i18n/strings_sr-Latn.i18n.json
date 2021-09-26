@@ -20,5 +20,6 @@
 "raw_result": "Prikaži kompletan rezultat" ,
 "no_internet_connection":"Nema internet konekcije",
 "cannot_find_domain":"Ne mozemo da pronadjemo domen",
-"bad_response":"Unesite validan domen"
+"bad_response":"Unesite validan domen",
+"invalid_domain":"Domen nije validan"
 }

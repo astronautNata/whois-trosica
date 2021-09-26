@@ -20,5 +20,6 @@
 "raw_result": "Прикажи комплетан резултат",
 "no_internet_connection":"Нема интернет конекције",
 "cannot_find_domain":"Не можемо да пронађемо домен",
-"bad_response":"Унесите валидан домен"
+"bad_response":"Унесите валидан домен",
+"invalid_domain":"Домен није валидан"
 }

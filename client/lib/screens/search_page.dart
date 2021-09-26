@@ -33,8 +33,8 @@ class SearchPage extends StatefulWidget {
   final languageStore;
   final pagesStore;
 
-  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
-      this.historyStore, this.languageStore, this.pagesStore,
+  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore, this.historyStore, this.languageStore,
+      this.pagesStore,
       {Key? key})
       : super(key: key);
 
@@ -130,8 +130,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             LocaleDropDown(
               onLocaleChange: (value) {
                 languageStore.changeLanguage(value);
-                LocaleSettings.setLocale(
-                    LocalizationPicker.returnAppLocale(languageStore.locale));
+                LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(languageStore.locale));
               },
               curentValue: languageStore.locale,
             ),
@@ -211,11 +210,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(left: 20.0, bottom: 25),
               child: Text(
-                'Not a valid domain!',
-                style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13),
+                t.invalid_domain,
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 13),
                 textAlign: TextAlign.left,
               )),
         );
@@ -241,8 +237,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildSearch() {
     return Padding(
-      padding:
-          const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 10),
+      padding: const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 10),
       child: IntrinsicHeight(
         child: Stack(
           children: [
@@ -262,6 +257,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             searchStore.setErrorVisibillity(true);
             return;
           }
+          searchStore.setErrorVisibillity(false);
           await searchStore.setDomen(value);
           await Navigator.of(context).push(
             RouterAnimator.animateRoute(
@@ -320,8 +316,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 return HistoryCard(
                   whois: historyStore.historyWhoiss[index],
                   onClick: () async {
-                    await searchStore
-                        .setDomen(historyStore.historyWhoiss[index].domen!);
+                    await searchStore.setDomen(historyStore.historyWhoiss[index].domen!);
                     pagesStore.selectPage(Pages.Result.index);
                   },
                 );
