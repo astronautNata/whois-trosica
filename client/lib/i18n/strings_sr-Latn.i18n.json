@@ -15,5 +15,8 @@
 "favorite_domains":"Omiljeni domeni",
 "domain_owner":"Vlasnik",
 "registration_date":"Datum registrovanja",
-"expiration_date":"Datum isteka"
+"expiration_date":"Datum isteka",
+"no_internet_connection":"Nema internet konekcije",
+"cannot_find_domain":"Ne mozemo da pronadjemo domen",
+"bad_response":"Unesite validan domen"
 }

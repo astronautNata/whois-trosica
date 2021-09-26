@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 51 (17.0 per locale)
+ * Strings: 60 (20.0 per locale)
  * 
- * Built on 2021-09-26 at 12:33 UTC
+ * Built on 2021-09-26 at 15:40 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -270,6 +270,9 @@ class _StringsEn {
 	String get domain_owner => 'Vlasnik';
 	String get registration_date => 'Datum registrovanja';
 	String get expiration_date => 'Datum isteka';
+	String get no_internet_connection => 'Nema internet konekcije';
+	String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	String get bad_response => 'Unesite validan domen';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -299,6 +302,9 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get domain_owner => 'Власник';
 	@override String get registration_date => 'Датум регистровања';
 	@override String get expiration_date => 'Датум истека';
+	@override String get no_internet_connection => 'Нема интернет конекције';
+	@override String get cannot_find_domain => 'Не можемо да пронађемо домен';
+	@override String get bad_response => 'Унесите валидан домен';
 
 	/// A flat map containing all translations.
 	@override
@@ -329,6 +335,9 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get domain_owner => 'Vlasnik';
 	@override String get registration_date => 'Datum registrovanja';
 	@override String get expiration_date => 'Datum isteka';
+	@override String get no_internet_connection => 'Nema internet konekcije';
+	@override String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	@override String get bad_response => 'Unesite validan domen';
 
 	/// A flat map containing all translations.
 	@override
@@ -358,6 +367,9 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+		'no_internet_connection': 'Nema internet konekcije',
+		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'bad_response': 'Unesite validan domen',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -377,6 +389,9 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Власник',
 		'registration_date': 'Датум регистровања',
 		'expiration_date': 'Датум истека',
+		'no_internet_connection': 'Нема интернет конекције',
+		'cannot_find_domain': 'Не можемо да пронађемо домен',
+		'bad_response': 'Унесите валидан домен',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -396,5 +411,8 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
 		'expiration_date': 'Datum isteka',
+		'no_internet_connection': 'Nema internet konekcije',
+		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'bad_response': 'Unesite validan domen',
 	},
 };
