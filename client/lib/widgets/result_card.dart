@@ -5,14 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:whois_trosica/constants/colors.dart';
 import 'package:whois_trosica/models/WhoisResponse.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
+import 'package:whois_trosica/widgets/alert_bottom_sheet.dart';
 import 'package:whois_trosica/widgets/heart.dart';
 
 class ResultCardWidget extends StatelessWidget {
   final WhoisResponse whois;
   final VoidCallback favClicked;
-  const ResultCardWidget(
-      {Key? key, required this.whois, required this.favClicked})
-      : super(key: key);
+  const ResultCardWidget({Key? key, required this.whois, required this.favClicked}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +25,8 @@ class ResultCardWidget extends StatelessWidget {
       );
     }
 
+    Future<void> onAlertTurn() async {}
+
     Widget _buildTitle() {
       return Observer(
         builder: (context) {
@@ -38,15 +39,20 @@ class ResultCardWidget extends StatelessWidget {
               children: [
                 Text(
                   whois.domen ?? '',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: ColorsHelper.darkTextColor),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ColorsHelper.darkTextColor),
                 ),
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            backgroundColor: ColorsHelper.bottomSheetOverlayBackground,
+                            builder: (context) {
+                              return AlertBottomSheet(onAlertTurn);
+                            },
+                          );
+                        },
                         icon: Icon(
                           FontAwesomeIcons.bell,
                           color: ColorsHelper.iconColor,
@@ -76,10 +82,8 @@ class ResultCardWidget extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  color: ColorsHelper.iconColor.withOpacity(0.7)),
+              style:
+                  TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.iconColor.withOpacity(0.7)),
             ),
             SizedBox(
               height: 5,
@@ -87,10 +91,7 @@ class ResultCardWidget extends StatelessWidget {
             Text(
               subtitle ?? '',
               textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  color: ColorsHelper.darkTextColor),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: ColorsHelper.darkTextColor),
             )
           ],
         ),
@@ -114,10 +115,8 @@ class ResultCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildSubtitleContent('Vlasnik', whois.owner),
-                      _buildSubtitleContent('Datum registrovanja',
-                          whois.registrationDate.toString()),
-                      _buildSubtitleContent(
-                          'Datum isteka', whois.expirationDate.toString()),
+                      _buildSubtitleContent('Datum registrovanja', whois.registrationDate.toString()),
+                      _buildSubtitleContent('Datum isteka', whois.expirationDate.toString()),
                     ],
                   ),
                 ),
@@ -129,10 +128,7 @@ class ResultCardWidget extends StatelessWidget {
                       _buildSubtitleContent(
                           'Name servers',
                           whois.nameservers
-                              ?.fold<String>(
-                                  '',
-                                  (previousValue, element) =>
-                                      '$previousValue\n${element.trim()}')
+                              ?.fold<String>('', (previousValue, element) => '$previousValue\n${element.trim()}')
                               .trim())
                     ],
                   ),

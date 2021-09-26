@@ -6,11 +6,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mobx/mobx.dart';
+import 'package:whois_trosica/animations/router_animation.dart';
 import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
 import 'package:whois_trosica/constants/enums.dart';
 import 'package:whois_trosica/constants/font.dart';
 import 'package:whois_trosica/i18n/strings.g.dart';
+import 'package:whois_trosica/screens/result_page.dart';
 import 'package:whois_trosica/services/localization.dart';
 import 'package:whois_trosica/stores/connectivity_store.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
@@ -30,8 +32,8 @@ class SearchPage extends StatefulWidget {
   final languageStore;
   final pagesStore;
 
-  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
-      this.historyStore, this.languageStore, this.pagesStore,
+  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore, this.historyStore, this.languageStore,
+      this.pagesStore,
       {Key? key})
       : super(key: key);
 
@@ -125,8 +127,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             LocaleDropDown(
               onLocaleChange: (value) {
                 languageStore.changeLanguage(value);
-                LocaleSettings.setLocale(
-                    LocalizationPicker.returnAppLocale(languageStore.locale));
+                LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(languageStore.locale));
               },
               curentValue: languageStore.locale,
             ),
@@ -215,8 +216,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildSearch() {
     return Padding(
-      padding:
-          const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 25),
+      padding: const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 25),
       child: IntrinsicHeight(
         child: Stack(
           children: [
@@ -233,7 +233,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
       child: SearchBox(
         (value) async => {
           await searchStore.setDomen(value),
-          pagesStore.selectPage(Pages.Result.index)
+          Navigator.of(context).push(RouterAnimator.animateRoute(() => ResultPage(
+                pages: pagesStore,
+                store: searchStore,
+              )))
         },
       ),
     );
@@ -281,8 +284,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 return HistoryCard(
                   whois: historyStore.historyWhoiss[index],
                   onClick: () async {
-                    await searchStore
-                        .setDomen(historyStore.historyWhoiss[index].domen!);
+                    await searchStore.setDomen(historyStore.historyWhoiss[index].domen!);
                     pagesStore.selectPage(Pages.Result.index);
                   },
                 );
