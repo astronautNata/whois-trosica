@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:whois_trosica/constants/font.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/widgets/result_card.dart';
@@ -36,12 +37,10 @@ class FavoritePage extends StatelessWidget {
                 Container(
                   height: 56,
                   width: 56,
-                  child: GestureDetector(
-                      onTap: () => pagesStore.selectPage(0),
-                      child: Icon(Icons.arrow_back)),
+                  child: GestureDetector(onTap: () => pagesStore.selectPage(0), child: Icon(Icons.arrow_back)),
                 ),
                 Text(
-                  'Omiljeni domeni',
+                  t.favorite_domains,
                   style: Font.heading1,
                 ),
                 Container(

@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 24 (8.0 per locale)
+ * Strings: 51 (17.0 per locale)
  * 
- * Built on 2021-09-25 at 21:58 UTC
+ * Built on 2021-09-26 at 12:25 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -261,6 +261,15 @@ class _StringsEn {
 	String get home_title2 => 'domacim domenima';
 	String get home_last_search => 'POSLEDNJE PRETRAGE';
 	String get enter_domain => 'Unesi domen ovde';
+	String get alert_turn_on => 'Ukljuci';
+	String get alert_cancel => 'Otkazi';
+	String get turn_remainder => 'Ukljuci podsetnik?';
+	String get domain_found => 'je pronadjen!';
+	String get domain_not_found => 'nije pronadjen!';
+	String get favorite_domains => 'Omiljeni domeni';
+	String get domain_owner => 'Vlasnik';
+	String get registration_date => 'Datum registrovanja';
+	String get expiration_date => 'Datum isteka';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -281,6 +290,15 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get home_title2 => 'домаћим доменима';
 	@override String get home_last_search => 'ПОСЛЕДЊЕ ПРЕТРАГЕ';
 	@override String get enter_domain => 'Унеси домен овде';
+	@override String get alert_turn_on => 'Укључи';
+	@override String get alert_cancel => 'Откажи';
+	@override String get turn_remainder => 'Укључи подсетник?';
+	@override String get domain_found => 'је пронађен!';
+	@override String get domain_not_found => 'није пронађен!';
+	@override String get favorite_domains => 'Омиљени домени';
+	@override String get domain_owner => 'Власник';
+	@override String get registration_date => 'Датум регистровања';
+	@override String get expiration_date => 'Датум истека';
 
 	/// A flat map containing all translations.
 	@override
@@ -302,6 +320,15 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get home_title2 => 'domacim domenima';
 	@override String get home_last_search => 'POSLEDNJE PRETRAGE';
 	@override String get enter_domain => 'Unesi domen ovde';
+	@override String get alert_turn_on => 'Ukljuci';
+	@override String get alert_cancel => 'Otkazi';
+	@override String get turn_remainder => 'Ukljuci podsetnik?';
+	@override String get domain_found => 'je pronadjen!';
+	@override String get domain_not_found => 'nije pronadjen!';
+	@override String get favorite_domains => 'Omiljeni domeni';
+	@override String get domain_owner => 'Vlasnik';
+	@override String get registration_date => 'Datum registrovanja';
+	@override String get expiration_date => 'Datum isteka';
 
 	/// A flat map containing all translations.
 	@override
@@ -322,6 +349,15 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'home_title2': 'domacim domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
+		'alert_turn_on': 'Ukljuci',
+		'alert_cancel': 'Otkazi',
+		'turn_remainder': 'Ukljuci podsetnik?',
+		'domain_found': 'je pronadjen!',
+		'domain_not_found': 'nije pronadjen!',
+		'favorite_domains': 'Omiljeni domeni',
+		'domain_owner': 'Vlasnik',
+		'registration_date': 'Datum registrovanja',
+		'expiration_date': 'Datum isteka',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -332,6 +368,15 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'home_title2': 'домаћим доменима',
 		'home_last_search': 'ПОСЛЕДЊЕ ПРЕТРАГЕ',
 		'enter_domain': 'Унеси домен овде',
+		'alert_turn_on': 'Укључи',
+		'alert_cancel': 'Откажи',
+		'turn_remainder': 'Укључи подсетник?',
+		'domain_found': 'је пронађен!',
+		'domain_not_found': 'није пронађен!',
+		'favorite_domains': 'Омиљени домени',
+		'domain_owner': 'Власник',
+		'registration_date': 'Датум регистровања',
+		'expiration_date': 'Датум истека',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -342,5 +387,14 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'home_title2': 'domacim domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
+		'alert_turn_on': 'Ukljuci',
+		'alert_cancel': 'Otkazi',
+		'turn_remainder': 'Ukljuci podsetnik?',
+		'domain_found': 'je pronadjen!',
+		'domain_not_found': 'nije pronadjen!',
+		'favorite_domains': 'Omiljeni domeni',
+		'domain_owner': 'Vlasnik',
+		'registration_date': 'Datum registrovanja',
+		'expiration_date': 'Datum isteka',
 	},
 };

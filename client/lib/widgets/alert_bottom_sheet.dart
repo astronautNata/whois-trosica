@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 
 class AlertBottomSheet extends StatelessWidget {
   final AsyncCallback turnOn;
@@ -26,13 +27,14 @@ class AlertBottomSheet extends StatelessWidget {
             height: 10,
           ),
           Text(
-            'Ukljuci podsetnik?',
+            t.turn_remainder,
             style: TextStyle(color: ColorsHelper.darkTextColor, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
+            //TODO change this
             'Opis obavestenja',
             style: TextStyle(color: ColorsHelper.lightTextColor, fontSize: 13, fontWeight: FontWeight.w400),
           ),
@@ -47,7 +49,7 @@ class AlertBottomSheet extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all(ColorsHelper.domenTextContainer),
                     minimumSize: MaterialStateProperty.all((Size(double.infinity, 48)))),
                 child: Text(
-                  'Ukljuci',
+                  t.alert_turn_on,
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.white),
                 )),
           ),
@@ -59,7 +61,7 @@ class AlertBottomSheet extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all(ColorsHelper.borderColor.withOpacity(0.4)),
                     minimumSize: MaterialStateProperty.all((Size(double.infinity, 48)))),
                 child: Text(
-                  'Otkazi',
+                  t.alert_cancel,
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: ColorsHelper.iconColor),
                 )),
           ),

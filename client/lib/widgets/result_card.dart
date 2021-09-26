@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 import 'package:whois_trosica/models/WhoisResponse.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/widgets/alert_bottom_sheet.dart';
@@ -114,9 +115,9 @@ class ResultCardWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildSubtitleContent('Vlasnik', whois.owner),
-                      _buildSubtitleContent('Datum registrovanja', whois.registrationDate.toString()),
-                      _buildSubtitleContent('Datum isteka', whois.expirationDate.toString()),
+                      _buildSubtitleContent(t.domain_owner, whois.owner),
+                      _buildSubtitleContent(t.registration_date, whois.registrationDate.toString()),
+                      _buildSubtitleContent(t.expiration_date, whois.expirationDate.toString()),
                     ],
                   ),
                 ),

@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
 import 'package:whois_trosica/constants/enums.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/stores/search_store.dart';
 import 'package:whois_trosica/widgets/result_card.dart';
@@ -80,7 +81,7 @@ class _ResultPageState extends State<ResultPage> {
           ),
           if (store.errorStore.errorMessage.isEmpty)
             Text(
-              'je pronadjen!',
+              t.domain_found,
               style: TextStyle(
                 color: ColorsHelper.lightTextColor,
                 fontSize: 16,
@@ -89,7 +90,7 @@ class _ResultPageState extends State<ResultPage> {
             ),
           if (store.errorStore.errorMessage.isNotEmpty)
             Text(
-              'nije pronadjen!',
+              t.domain_not_found,
               style: TextStyle(
                 color: ColorsHelper.lightTextColor,
                 fontSize: 16,
