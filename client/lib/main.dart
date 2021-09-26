@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,39 @@ import 'package:whois_trosica/stores/language_store.dart';
 import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/stores/search_store.dart';
 
+Future<void> initFB() async {
+  var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  const initializationSettingsAndroid =
+      AndroidInitializationSettings('launch_background');
+
+  final initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+  );
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    if (message.notification != null) {
+      const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+          'id', 'name', 'desc',
+          importance: Importance.max, priority: Priority.high, showWhen: false);
+
+      const platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+
+      if (message.notification != null) {
+        await flutterLocalNotificationsPlugin.show(
+          0,
+          message.notification!.title ?? '',
+          message.notification!.body ?? '',
+          platformChannelSpecifics,
+        );
+      }
+    }
+  });
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPreferedOrientation();
@@ -35,6 +69,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   final messaging = FirebaseMessaging.instance;
   prefsService.fbToken = await messaging.getToken();
+  await initFB();
+
   LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(
       prefsService.readPreferredLocalization));
 
