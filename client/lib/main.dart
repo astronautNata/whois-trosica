@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,9 +23,18 @@ import 'package:whois_trosica/stores/search_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final sharedPreferences = await SharedPreferences.getInstance();
   setPreferedOrientation();
-  runApp(TranslationProvider(child: MyApp(sharedPreferences)));
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(statusBarColor: Colors.grey[50]),
+  );
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final prefsService = PreferencesService(sharedPreferences);
+  await Firebase.initializeApp();
+  final messaging = FirebaseMessaging.instance;
+  prefsService.fbToken = await messaging.getToken();
+
+  runApp(TranslationProvider(child: MyApp(sharedPreferences, prefsService)));
 }
 
 void setPreferedOrientation() {
@@ -36,15 +47,17 @@ void setPreferedOrientation() {
 class MyApp extends StatelessWidget {
   final SharedPreferences sharedPreferences;
   final _pagesStore = PagesStore();
+  final _preferencesService;
 
-  MyApp(this.sharedPreferences, {Key? key}) : super(key: key);
+  MyApp(this.sharedPreferences, this._preferencesService, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         Provider<PreferencesService>(
-          create: (_) => PreferencesService(sharedPreferences),
+          create: (_) => _preferencesService,
         ),
         Provider<PagesStore>(
           create: (_) => _pagesStore,
@@ -69,7 +82,7 @@ class MyApp extends StatelessWidget {
           builder: (context) {
             return MaterialApp(
               title: 'whoisTrosica',
-              theme: ThemeData(primarySwatch: Colors.blue),
+              theme: ThemeData(primaryColor: Colors.white),
               debugShowCheckedModeBanner: false,
               supportedLocales: languageStore.supportedLanguages,
               locale: LocalizationPicker.returnLocale(languageStore.locale),
@@ -81,59 +94,12 @@ class MyApp extends StatelessWidget {
               home: Observer(
                 builder: (_) => Scaffold(
                   body: PageContainer(_pagesStore.selectedDestination),
-                  //bottomNavigationBar: AppBottomNavigationBar(_pagesStore),
                 ),
               ),
             );
           },
         );
       }),
-    );
-  }
-}
-
-class AppBottomNavigationBar extends StatelessWidget {
-  final PagesStore store;
-
-  const AppBottomNavigationBar(
-    this.store, {
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      key: const Key('bottomNavigationBar'),
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      currentIndex: store.selectedDestinationIndex,
-      items: PagesStoreBase.pages.map(
-        (option) {
-          switch (option) {
-            case Pages.Home:
-              return BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: t.label_search,
-              );
-            case Pages.Favorite:
-              return BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: t.label_favorite,
-              );
-            case Pages.History:
-              return BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                label: t.label_history,
-              );
-            default:
-              return const BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-              );
-          }
-        },
-      ).toList(),
-      onTap: (index) => store.selectPage(index),
     );
   }
 }

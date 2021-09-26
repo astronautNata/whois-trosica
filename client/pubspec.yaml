@@ -23,6 +23,8 @@ dependencies:
   enum_to_string: ^2.0.1
   font_awesome_flutter: ^9.1.0
   lottie: ^1.2.1
+  firebase_core: ^1.6.0
+  firebase_messaging: ^10.0.7
 
 dev_dependencies:
   flutter_test:
