@@ -20,20 +20,26 @@ abstract class FavoritesStoreBase with Store {
   @action
   void toggleFavorite(WhoisResponse whois) {
     if (containsFavorite(whois)) {
-      _removeFromFavorite(whois);
+      removeFromFavorite(whois);
     } else {
-      _addToFavorite(whois);
+      addToFavorite(whois);
     }
   }
 
-  void _addToFavorite(WhoisResponse whois) {
-    favoriteWhoiss.add(whois);
-    _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
+  @action
+  void addToFavorite(WhoisResponse whois) {
+    if (!containsFavorite(whois)) {
+      favoriteWhoiss.add(whois);
+      _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
+    }
   }
 
-  void _removeFromFavorite(WhoisResponse whois) {
-    favoriteWhoiss.remove(whois);
-    _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
+  @action
+  void removeFromFavorite(WhoisResponse whois) {
+    if (containsFavorite(whois)) {
+      favoriteWhoiss.remove(whois);
+      _preferencesService.saveListOfFavoritedWhoiss = favoriteWhoiss;
+    }
   }
 
   bool containsFavorite(WhoisResponse whois) {

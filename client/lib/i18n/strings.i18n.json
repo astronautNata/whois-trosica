@@ -22,5 +22,14 @@
 "cannot_find_domain":"Ne možemo da pronađemo domen",
 "bad_response":"Unesite validan domen",
 "invalid_domain":"Domen nije validan",
-"server_names":"Imena servera"
+"server_names":"Imena servera",
+"alerts":"Obaveštenja",
+"alert_email": "Omoguci email obavestenja",
+"alert_fb": "Omoguci in-app obavestenja",
+"email_not_valid": "Uneta email adresa nije ispravna",
+"email_accept": "Potvrdi",
+"email_enter": "Unesi email",
+"email": "email"
+
+
 }

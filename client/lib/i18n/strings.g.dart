@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 72 (24.0 per locale)
+ * Strings: 93 (31.0 per locale)
  * 
- * Built on 2021-09-26 at 20:27 UTC
+ * Built on 2021-09-26 at 20:39 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -277,6 +277,13 @@ class _StringsEn {
 	String get bad_response => 'Unesite validan domen';
 	String get invalid_domain => 'Domen nije validan';
 	String get server_names => 'Imena servera';
+	String get alerts => 'Obaveštenja';
+	String get alert_email => 'Omoguci email obavestenja';
+	String get alert_fb => 'Omoguci in-app obavestenja';
+	String get email_not_valid => 'Uneta email adresa nije ispravna';
+	String get email_accept => 'Potvrdi';
+	String get email_enter => 'Unesi email';
+	String get email => 'email';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -313,6 +320,13 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get bad_response => 'Унесите валидан домен';
 	@override String get invalid_domain => 'Домен није валидан';
 	@override String get server_names => 'Имена сервера';
+	@override String get alerts => 'Обавештења';
+	@override String get alert_email => 'Омогући емаил обавештења';
+	@override String get alert_fb => 'Омогући апликацијска обавештења';
+	@override String get email_not_valid => 'Унета емаил адреса није исправна';
+	@override String get email_enter => 'Унеси емаил';
+	@override String get email => 'емаил';
+	@override String get email_accept => 'Потврди';
 
 	/// A flat map containing all translations.
 	@override
@@ -350,6 +364,13 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get bad_response => 'Unesite validan domen';
 	@override String get invalid_domain => 'Domen nije validan';
 	@override String get server_names => 'Imena servera';
+	@override String get alerts => 'Obaveštenja';
+	@override String get alert_email => 'Omoguci email obavestenja';
+	@override String get alert_fb => 'Omoguci in-app obavestenja';
+	@override String get email_not_valid => 'Uneta email adresa nije ispravna';
+	@override String get email_enter => 'Unesi email';
+	@override String get email => 'email';
+	@override String get email_accept => 'Potvrdi';
 
 	/// A flat map containing all translations.
 	@override
@@ -386,6 +407,13 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'bad_response': 'Unesite validan domen',
 		'invalid_domain': 'Domen nije validan',
 		'server_names': 'Imena servera',
+		'alerts': 'Obaveštenja',
+		'alert_email': 'Omoguci email obavestenja',
+		'alert_fb': 'Omoguci in-app obavestenja',
+		'email_not_valid': 'Uneta email adresa nije ispravna',
+		'email_accept': 'Potvrdi',
+		'email_enter': 'Unesi email',
+		'email': 'email',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -412,6 +440,13 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'bad_response': 'Унесите валидан домен',
 		'invalid_domain': 'Домен није валидан',
 		'server_names': 'Имена сервера',
+		'alerts': 'Обавештења',
+		'alert_email': 'Омогући емаил обавештења',
+		'alert_fb': 'Омогући апликацијска обавештења',
+		'email_not_valid': 'Унета емаил адреса није исправна',
+		'email_enter': 'Унеси емаил',
+		'email': 'емаил',
+		'email_accept': 'Потврди',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -438,5 +473,12 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'bad_response': 'Unesite validan domen',
 		'invalid_domain': 'Domen nije validan',
 		'server_names': 'Imena servera',
+		'alerts': 'Obaveštenja',
+		'alert_email': 'Omoguci email obavestenja',
+		'alert_fb': 'Omoguci in-app obavestenja',
+		'email_not_valid': 'Uneta email adresa nije ispravna',
+		'email_enter': 'Unesi email',
+		'email': 'email',
+		'email_accept': 'Potvrdi',
 	},
 };

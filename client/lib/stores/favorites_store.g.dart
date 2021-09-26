@@ -39,6 +39,28 @@ mixin _$FavoritesStore on FavoritesStoreBase, Store {
   }
 
   @override
+  void addToFavorite(WhoisResponse whois) {
+    final _$actionInfo = _$FavoritesStoreBaseActionController.startAction(
+        name: 'FavoritesStoreBase.addToFavorite');
+    try {
+      return super.addToFavorite(whois);
+    } finally {
+      _$FavoritesStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeFromFavorite(WhoisResponse whois) {
+    final _$actionInfo = _$FavoritesStoreBaseActionController.startAction(
+        name: 'FavoritesStoreBase.removeFromFavorite');
+    try {
+      return super.removeFromFavorite(whois);
+    } finally {
+      _$FavoritesStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 favoriteWhoiss: ${favoriteWhoiss}

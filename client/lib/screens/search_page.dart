@@ -4,10 +4,8 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mobx/mobx.dart';
 import 'package:whois_trosica/animations/router_animation.dart';
-import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
 import 'package:whois_trosica/constants/domain_regex.dart';
 import 'package:whois_trosica/constants/enums.dart';
@@ -33,8 +31,8 @@ class SearchPage extends StatefulWidget {
   final languageStore;
   final pagesStore;
 
-  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore, this.historyStore, this.languageStore,
-      this.pagesStore,
+  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
+      this.historyStore, this.languageStore, this.pagesStore,
       {Key? key})
       : super(key: key);
 
@@ -130,7 +128,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             LocaleDropDown(
               onLocaleChange: (value) {
                 languageStore.changeLanguage(value);
-                LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(languageStore.locale));
+                LocaleSettings.setLocale(
+                    LocalizationPicker.returnAppLocale(languageStore.locale));
               },
               curentValue: languageStore.locale,
             ),
@@ -138,10 +137,13 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             Container(
               height: 56,
               width: 56,
-              child: Icon(
-                FontAwesomeIcons.bell,
-                color: ColorsHelper.iconColor,
-                size: 24,
+              child: GestureDetector(
+                onTap: () => pagesStore.selectPage(Pages.Alerts.index),
+                child: Icon(
+                  FontAwesomeIcons.bell,
+                  color: ColorsHelper.iconColor,
+                  size: 24,
+                ),
               ),
             ),
             Container(
@@ -201,7 +203,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               padding: const EdgeInsets.only(left: 20.0, bottom: 25),
               child: Text(
                 t.invalid_domain,
-                style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 13),
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13),
                 textAlign: TextAlign.left,
               )),
         );
@@ -227,7 +232,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildSearch() {
     return Padding(
-      padding: const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 10),
+      padding:
+          const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 10),
       child: IntrinsicHeight(
         child: Stack(
           children: [
@@ -288,7 +294,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.only(left: 16.0, top: 16),
             child: Text(
               t.home_last_search,
               style: Font.caption3.copyWith(color: ColorsHelper.iconColor),
@@ -306,7 +312,8 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 return HistoryCard(
                   whois: historyStore.historyWhoiss[index],
                   onClick: () async {
-                    await searchStore.setDomen(historyStore.historyWhoiss[index].domen!);
+                    await searchStore
+                        .setDomen(historyStore.historyWhoiss[index].domen!);
                     pagesStore.selectPage(Pages.Result.index);
                   },
                 );

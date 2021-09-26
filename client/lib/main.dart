@@ -8,12 +8,14 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whois_trosica/constants/enums.dart';
 import 'package:whois_trosica/i18n/strings.g.dart';
+import 'package:whois_trosica/screens/alerts_page.dart';
 import 'package:whois_trosica/screens/favorite_page.dart';
 import 'package:whois_trosica/screens/history_page.dart';
 import 'package:whois_trosica/screens/result_page.dart';
 import 'package:whois_trosica/screens/search_page.dart';
 import 'package:whois_trosica/services/localization.dart';
 import 'package:whois_trosica/services/sharedpreferences.dart';
+import 'package:whois_trosica/stores/alerts_store.dart';
 import 'package:whois_trosica/stores/connectivity_store.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/stores/history_store.dart';
@@ -73,6 +75,9 @@ class MyApp extends StatelessWidget {
         ProxyProvider<PreferencesService, FavoritesStore>(
             update: (_, preferencesService, __) =>
                 FavoritesStore(preferencesService)),
+        ProxyProvider<PreferencesService, AlertsStore>(
+            update: (_, preferencesService, __) =>
+                AlertsStore(preferencesService)),
         ProxyProvider<PreferencesService, HistoryStore>(
             update: (_, preferencesService, __) =>
                 HistoryStore(preferencesService)),
@@ -96,6 +101,7 @@ class MyApp extends StatelessWidget {
               home: Observer(
                 builder: (_) => Scaffold(
                   body: PageContainer(_pagesStore.selectedDestination),
+                  resizeToAvoidBottomInset: true,
                 ),
               ),
             );
@@ -132,6 +138,10 @@ class PageContainer extends StatelessWidget {
         return Consumer2<SearchStore, PagesStore>(
             builder: (_, searchStore, pagesStore, __) =>
                 ResultPage(store: searchStore, pages: pagesStore));
+      case Pages.Alerts:
+        return Consumer2<AlertsStore, PagesStore>(
+            builder: (_, alertsStore, pagesStore, __) =>
+                AlertsPage(alertsStore, pagesStore));
       default:
         return Consumer6<SearchStore, ConnectivityStore, FavoritesStore,
                 HistoryStore, LanguageStore, PagesStore>(

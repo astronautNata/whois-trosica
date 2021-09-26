@@ -28,7 +28,10 @@ class AlertBottomSheet extends StatelessWidget {
           ),
           Text(
             t.turn_remainder,
-            style: TextStyle(color: ColorsHelper.darkTextColor, fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: ColorsHelper.darkTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: 10,
@@ -38,11 +41,16 @@ class AlertBottomSheet extends StatelessWidget {
             child: TextButton(
                 onPressed: turnOn,
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(ColorsHelper.domenTextContainer),
-                    minimumSize: MaterialStateProperty.all((Size(double.infinity, 48)))),
+                    backgroundColor:
+                        MaterialStateProperty.all(ColorsHelper.actionColor),
+                    minimumSize:
+                        MaterialStateProperty.all((Size(double.infinity, 48)))),
                 child: Text(
                   t.alert_turn_on,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.white),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      color: Colors.white),
                 )),
           ),
           Padding(
@@ -50,11 +58,16 @@ class AlertBottomSheet extends StatelessWidget {
             child: TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(ColorsHelper.borderColor.withOpacity(0.4)),
-                    minimumSize: MaterialStateProperty.all((Size(double.infinity, 48)))),
+                    backgroundColor: MaterialStateProperty.all(
+                        ColorsHelper.borderColor.withOpacity(0.4)),
+                    minimumSize:
+                        MaterialStateProperty.all((Size(double.infinity, 48)))),
                 child: Text(
                   t.alert_cancel,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: ColorsHelper.iconColor),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      color: ColorsHelper.iconColor),
                 )),
           ),
         ],
