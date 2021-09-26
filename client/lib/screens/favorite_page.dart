@@ -11,11 +11,6 @@ class FavoritePage extends StatelessWidget {
   final PagesStore pagesStore;
   const FavoritePage(this.store, this.pagesStore, {Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return _buildBody(context);
-  }
-
   Widget _buildBody(context) {
     return SingleChildScrollView(child: _buildWhoiss(context));
   }
@@ -37,7 +32,9 @@ class FavoritePage extends StatelessWidget {
                 Container(
                   height: 56,
                   width: 56,
-                  child: GestureDetector(onTap: () => pagesStore.selectPage(0), child: Icon(Icons.arrow_back)),
+                  child: GestureDetector(
+                      onTap: () => pagesStore.selectPage(0),
+                      child: Icon(Icons.arrow_back)),
                 ),
                 Text(
                   t.favorite_domains,
@@ -70,5 +67,16 @@ class FavoritePage extends StatelessWidget {
         ],
       );
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        pagesStore.selectPage(0);
+        return false;
+      },
+      child: _buildBody(context),
+    );
   }
 }
