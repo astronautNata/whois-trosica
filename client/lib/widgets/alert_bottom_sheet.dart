@@ -33,14 +33,6 @@ class AlertBottomSheet extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text(
-            //TODO change this
-            'Opis obavestenja',
-            style: TextStyle(color: ColorsHelper.lightTextColor, fontSize: 13, fontWeight: FontWeight.w400),
-          ),
-          SizedBox(
-            height: 10,
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
             child: TextButton(

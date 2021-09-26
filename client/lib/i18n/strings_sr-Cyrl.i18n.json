@@ -21,5 +21,6 @@
 "no_internet_connection":"Нема интернет конекције",
 "cannot_find_domain":"Не можемо да пронађемо домен",
 "bad_response":"Унесите валидан домен",
-"invalid_domain":"Домен није валидан"
+"invalid_domain":"Домен није валидан",
+"server_names":"Имена сервера"
 }

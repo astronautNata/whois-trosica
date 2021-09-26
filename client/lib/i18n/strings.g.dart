@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 69 (23.0 per locale)
+ * Strings: 72 (24.0 per locale)
  * 
- * Built on 2021-09-26 at 18:29 UTC
+ * Built on 2021-09-26 at 20:27 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -257,15 +257,15 @@ class _StringsEn {
 	String get label_history => 'Istorija';
 	String get label_favorite => 'Omiljeno';
 	String get label_insert_domen => 'Unesite domen';
-	String get home_title1 => 'Pretrazi i upravljaj ';
-	String get home_title2 => 'domacim domenima';
+	String get home_title1 => 'Pretraži i upravljaj ';
+	String get home_title2 => 'domaćim domenima';
 	String get home_last_search => 'POSLEDNJE PRETRAGE';
 	String get enter_domain => 'Unesi domen ovde';
-	String get alert_turn_on => 'Ukljuci';
-	String get alert_cancel => 'Otkazi';
-	String get turn_remainder => 'Ukljuci podsetnik?';
-	String get domain_found => 'je pronadjen!';
-	String get domain_not_found => 'nije pronadjen!';
+	String get alert_turn_on => 'Uključi';
+	String get alert_cancel => 'Otkaži';
+	String get turn_remainder => 'Uključi podsetnik?';
+	String get domain_found => 'je pronađen!';
+	String get domain_not_found => 'nije pronađen!';
 	String get favorite_domains => 'Omiljeni domeni';
 	String get domain_owner => 'Vlasnik';
 	String get registration_date => 'Datum registrovanja';
@@ -273,9 +273,10 @@ class _StringsEn {
 	String get copied => 'Kopirano!';
 	String get raw_result => 'Prikaži kompletan rezultat';
 	String get no_internet_connection => 'Nema internet konekcije';
-	String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	String get cannot_find_domain => 'Ne možemo da pronađemo domen';
 	String get bad_response => 'Unesite validan domen';
 	String get invalid_domain => 'Domen nije validan';
+	String get server_names => 'Imena servera';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -311,6 +312,7 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get cannot_find_domain => 'Не можемо да пронађемо домен';
 	@override String get bad_response => 'Унесите валидан домен';
 	@override String get invalid_domain => 'Домен није валидан';
+	@override String get server_names => 'Имена сервера';
 
 	/// A flat map containing all translations.
 	@override
@@ -328,15 +330,15 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get label_history => 'Istorija';
 	@override String get label_favorite => 'Omiljeno';
 	@override String get label_insert_domen => 'Unesite domen';
-	@override String get home_title1 => 'Pretrazi i upravljaj ';
-	@override String get home_title2 => 'domacim domenima';
+	@override String get home_title1 => 'Pretraži i upravljaj ';
+	@override String get home_title2 => 'domaćim domenima';
 	@override String get home_last_search => 'POSLEDNJE PRETRAGE';
 	@override String get enter_domain => 'Unesi domen ovde';
-	@override String get alert_turn_on => 'Ukljuci';
-	@override String get alert_cancel => 'Otkazi';
-	@override String get turn_remainder => 'Ukljuci podsetnik?';
-	@override String get domain_found => 'je pronadjen!';
-	@override String get domain_not_found => 'nije pronadjen!';
+	@override String get alert_turn_on => 'Uključi';
+	@override String get alert_cancel => 'Otkaži';
+	@override String get turn_remainder => 'Uključi podsetnik?';
+	@override String get domain_found => 'je pronađen!';
+	@override String get domain_not_found => 'nije pronađen!';
 	@override String get favorite_domains => 'Omiljeni domeni';
 	@override String get domain_owner => 'Vlasnik';
 	@override String get registration_date => 'Datum registrovanja';
@@ -344,9 +346,10 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get copied => 'Kopirano!';
 	@override String get raw_result => 'Prikaži kompletan rezultat';
 	@override String get no_internet_connection => 'Nema internet konekcije';
-	@override String get cannot_find_domain => 'Ne mozemo da pronadjemo domen';
+	@override String get cannot_find_domain => 'Ne možemo da pronađemo domen';
 	@override String get bad_response => 'Unesite validan domen';
 	@override String get invalid_domain => 'Domen nije validan';
+	@override String get server_names => 'Imena servera';
 
 	/// A flat map containing all translations.
 	@override
@@ -363,15 +366,15 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'label_history': 'Istorija',
 		'label_favorite': 'Omiljeno',
 		'label_insert_domen': 'Unesite domen',
-		'home_title1': 'Pretrazi i upravljaj ',
-		'home_title2': 'domacim domenima',
+		'home_title1': 'Pretraži i upravljaj ',
+		'home_title2': 'domaćim domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
-		'alert_turn_on': 'Ukljuci',
-		'alert_cancel': 'Otkazi',
-		'turn_remainder': 'Ukljuci podsetnik?',
-		'domain_found': 'je pronadjen!',
-		'domain_not_found': 'nije pronadjen!',
+		'alert_turn_on': 'Uključi',
+		'alert_cancel': 'Otkaži',
+		'turn_remainder': 'Uključi podsetnik?',
+		'domain_found': 'je pronađen!',
+		'domain_not_found': 'nije pronađen!',
 		'favorite_domains': 'Omiljeni domeni',
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
@@ -379,9 +382,10 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'copied': 'Kopirano!',
 		'raw_result': 'Prikaži kompletan rezultat',
 		'no_internet_connection': 'Nema internet konekcije',
-		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'cannot_find_domain': 'Ne možemo da pronađemo domen',
 		'bad_response': 'Unesite validan domen',
 		'invalid_domain': 'Domen nije validan',
+		'server_names': 'Imena servera',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -407,21 +411,22 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'cannot_find_domain': 'Не можемо да пронађемо домен',
 		'bad_response': 'Унесите валидан домен',
 		'invalid_domain': 'Домен није валидан',
+		'server_names': 'Имена сервера',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
 		'label_history': 'Istorija',
 		'label_favorite': 'Omiljeno',
 		'label_insert_domen': 'Unesite domen',
-		'home_title1': 'Pretrazi i upravljaj ',
-		'home_title2': 'domacim domenima',
+		'home_title1': 'Pretraži i upravljaj ',
+		'home_title2': 'domaćim domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
-		'alert_turn_on': 'Ukljuci',
-		'alert_cancel': 'Otkazi',
-		'turn_remainder': 'Ukljuci podsetnik?',
-		'domain_found': 'je pronadjen!',
-		'domain_not_found': 'nije pronadjen!',
+		'alert_turn_on': 'Uključi',
+		'alert_cancel': 'Otkaži',
+		'turn_remainder': 'Uključi podsetnik?',
+		'domain_found': 'je pronađen!',
+		'domain_not_found': 'nije pronađen!',
 		'favorite_domains': 'Omiljeni domeni',
 		'domain_owner': 'Vlasnik',
 		'registration_date': 'Datum registrovanja',
@@ -429,8 +434,9 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'copied': 'Kopirano!',
 		'raw_result': 'Prikaži kompletan rezultat',
 		'no_internet_connection': 'Nema internet konekcije',
-		'cannot_find_domain': 'Ne mozemo da pronadjemo domen',
+		'cannot_find_domain': 'Ne možemo da pronađemo domen',
 		'bad_response': 'Unesite validan domen',
 		'invalid_domain': 'Domen nije validan',
+		'server_names': 'Imena servera',
 	},
 };

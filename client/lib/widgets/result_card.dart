@@ -44,10 +44,7 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
               children: [
                 Text(
                   widget.whois.domen ?? '',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: ColorsHelper.darkTextColor),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ColorsHelper.darkTextColor),
                 ),
                 Row(
                   children: [
@@ -55,8 +52,7 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
-                            backgroundColor:
-                                ColorsHelper.bottomSheetOverlayBackground,
+                            backgroundColor: ColorsHelper.bottomSheetOverlayBackground,
                             builder: (context) {
                               return AlertBottomSheet(onAlertTurn);
                             },
@@ -82,8 +78,7 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
       );
     }
 
-    Widget _buildSubtitleContent(String title, String? subtitle,
-        [bool showDivider = true]) {
+    Widget _buildSubtitleContent(String title, String? subtitle, [bool showDivider = true]) {
       return Padding(
         padding: EdgeInsets.only(bottom: 16, left: 16, right: 16),
         child: Column(
@@ -153,10 +148,8 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
                   if (rawOpened)
                     GestureDetector(
                       onTap: () {
-                        Clipboard.setData(
-                            ClipboardData(text: widget.whois.completeInfo));
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text(t.copied)));
+                        Clipboard.setData(ClipboardData(text: widget.whois.completeInfo));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.copied)));
                       },
                       child: Icon(
                         Icons.copy,
@@ -227,17 +220,12 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSubtitleContent(t.domain_owner, widget.whois.owner),
+            _buildSubtitleContent(t.registration_date, widget.whois.registrationDate.toString()),
+            _buildSubtitleContent(t.expiration_date, widget.whois.expirationDate.toString()),
             _buildSubtitleContent(
-                t.registration_date, widget.whois.registrationDate.toString()),
-            _buildSubtitleContent(
-                t.expiration_date, widget.whois.expirationDate.toString()),
-            _buildSubtitleContent(
-                'Name servers',
+                t.server_names,
                 widget.whois.nameservers
-                    ?.fold<String>(
-                        '',
-                        (previousValue, element) =>
-                            '$previousValue\n${element.trim()}')
+                    ?.fold<String>('', (previousValue, element) => '$previousValue\n${element.trim()}')
                     .trim(),
                 false),
             _buildRawResponseMenu(),
