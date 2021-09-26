@@ -20,7 +20,7 @@ public class WhoisController {
 
 	@PostMapping("/whois")
 	public void subscribeToNotifications(@RequestBody @NonNull WhoisNotificationSubscription param) {
-		whoisService.addSubscription(param.getEmail(), param.getToken(), param.getDomain());
+		whoisService.addSubscription(param.getEmail(), param.getToken(), param.getDomain(), param.isTest());
 	}
 
 	@DeleteMapping("/whois")

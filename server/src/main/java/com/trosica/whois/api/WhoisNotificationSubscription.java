@@ -10,5 +10,6 @@ public class WhoisNotificationSubscription {
 	private String email;
 	private String token;
 	private String domain;
+	private boolean test;
 
 }

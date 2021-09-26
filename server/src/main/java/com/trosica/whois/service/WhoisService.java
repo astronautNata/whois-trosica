@@ -23,10 +23,12 @@ public class WhoisService {
 	private final WhoisExecutor executor;
 	private final MailService mailService;
 
-	public void addSubscription(String email, String token, String domain) {
+	public void addSubscription(String email, String token, String domain, boolean test) {
 
-		Long expirationDate = executor.getWhois(domain)
-				.getExpirationDate();
+		long expirationDate = test ?
+							  currentTimeMillis() + TimeUnit.HOURS.toMillis(1) :
+							  executor.getWhois(domain)
+									  .getExpirationDate();
 
 		Subscription subscription = Subscription.builder()
 				.domain(domain)
