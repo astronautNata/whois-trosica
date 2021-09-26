@@ -255,6 +255,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           }
           searchStore.setErrorVisibillity(false);
           await searchStore.setDomen(value);
+          FocusManager.instance.primaryFocus?.unfocus();
           await Navigator.of(context).push(
             RouterAnimator.animateRoute(
               () => ResultPage(
@@ -309,11 +310,12 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               ),
               itemCount: historyStore.historyWhoiss.length,
               itemBuilder: (context, index) {
+                final whois =
+                    historyStore.historyWhoiss.reversed.toList()[index];
                 return HistoryCard(
-                  whois: historyStore.historyWhoiss[index],
+                  whois: whois,
                   onClick: () async {
-                    await searchStore
-                        .setDomen(historyStore.historyWhoiss[index].domen!);
+                    await searchStore.setDomen(whois.domen!);
                     pagesStore.selectPage(Pages.Result.index);
                   },
                 );

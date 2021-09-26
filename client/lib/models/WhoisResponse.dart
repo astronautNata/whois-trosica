@@ -67,7 +67,7 @@ class WhoisResponse {
         'owner': owner,
         'registrar': registrar,
         'registrationDate': registrationDate?.millisecondsSinceEpoch.toString(),
-        'expirationDate': expirationDate?.microsecondsSinceEpoch.toString(),
+        'expirationDate': expirationDate?.millisecondsSinceEpoch.toString(),
         'nameservers': nameservers,
         'completeInfo': completeInfo,
       };

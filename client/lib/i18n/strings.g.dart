@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  * 
  * Locales: 3
- * Strings: 93 (31.0 per locale)
+ * Strings: 96 (32.0 per locale)
  * 
- * Built on 2021-09-26 at 20:39 UTC
+ * Built on 2021-09-26 at 21:15 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -258,7 +258,7 @@ class _StringsEn {
 	String get label_favorite => 'Omiljeno';
 	String get label_insert_domen => 'Unesite domen';
 	String get home_title1 => 'Pretraži i upravljaj ';
-	String get home_title2 => 'domaćim domenima';
+	String get home_title2 => 'domenima';
 	String get home_last_search => 'POSLEDNJE PRETRAGE';
 	String get enter_domain => 'Unesi domen ovde';
 	String get alert_turn_on => 'Uključi';
@@ -284,6 +284,7 @@ class _StringsEn {
 	String get email_accept => 'Potvrdi';
 	String get email_enter => 'Unesi email';
 	String get email => 'email';
+	String get dns => 'DNS';
 
 	/// A flat map containing all translations.
 	dynamic operator[](String key) {
@@ -301,7 +302,7 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get label_favorite => 'Омиљено';
 	@override String get label_insert_domen => 'Унесите домен';
 	@override String get home_title1 => 'Претражи и управљај ';
-	@override String get home_title2 => 'домаћим доменима';
+	@override String get home_title2 => 'доменима';
 	@override String get home_last_search => 'ПОСЛЕДЊЕ ПРЕТРАГЕ';
 	@override String get enter_domain => 'Унеси домен овде';
 	@override String get alert_turn_on => 'Укључи';
@@ -327,6 +328,7 @@ class _StringsSrCyrl implements _StringsEn {
 	@override String get email_enter => 'Унеси емаил';
 	@override String get email => 'емаил';
 	@override String get email_accept => 'Потврди';
+	@override String get dns => 'ДНС';
 
 	/// A flat map containing all translations.
 	@override
@@ -345,7 +347,7 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get label_favorite => 'Omiljeno';
 	@override String get label_insert_domen => 'Unesite domen';
 	@override String get home_title1 => 'Pretraži i upravljaj ';
-	@override String get home_title2 => 'domaćim domenima';
+	@override String get home_title2 => 'domenima';
 	@override String get home_last_search => 'POSLEDNJE PRETRAGE';
 	@override String get enter_domain => 'Unesi domen ovde';
 	@override String get alert_turn_on => 'Uključi';
@@ -371,6 +373,7 @@ class _StringsSrLatn implements _StringsEn {
 	@override String get email_enter => 'Unesi email';
 	@override String get email => 'email';
 	@override String get email_accept => 'Potvrdi';
+	@override String get dns => 'DNS';
 
 	/// A flat map containing all translations.
 	@override
@@ -388,7 +391,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'label_favorite': 'Omiljeno',
 		'label_insert_domen': 'Unesite domen',
 		'home_title1': 'Pretraži i upravljaj ',
-		'home_title2': 'domaćim domenima',
+		'home_title2': 'domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
 		'alert_turn_on': 'Uključi',
@@ -414,6 +417,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'email_accept': 'Potvrdi',
 		'email_enter': 'Unesi email',
 		'email': 'email',
+		'dns': 'DNS',
 	},
 	AppLocale.srCyrl: {
 		'label_search': 'Претрага',
@@ -421,7 +425,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'label_favorite': 'Омиљено',
 		'label_insert_domen': 'Унесите домен',
 		'home_title1': 'Претражи и управљај ',
-		'home_title2': 'домаћим доменима',
+		'home_title2': 'доменима',
 		'home_last_search': 'ПОСЛЕДЊЕ ПРЕТРАГЕ',
 		'enter_domain': 'Унеси домен овде',
 		'alert_turn_on': 'Укључи',
@@ -447,6 +451,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'email_enter': 'Унеси емаил',
 		'email': 'емаил',
 		'email_accept': 'Потврди',
+		'dns': 'ДНС',
 	},
 	AppLocale.srLatn: {
 		'label_search': 'Pretraga',
@@ -454,7 +459,7 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'label_favorite': 'Omiljeno',
 		'label_insert_domen': 'Unesite domen',
 		'home_title1': 'Pretraži i upravljaj ',
-		'home_title2': 'domaćim domenima',
+		'home_title2': 'domenima',
 		'home_last_search': 'POSLEDNJE PRETRAGE',
 		'enter_domain': 'Unesi domen ovde',
 		'alert_turn_on': 'Uključi',
@@ -480,5 +485,6 @@ late Map<AppLocale, Map<String, dynamic>> _translationMap = {
 		'email_enter': 'Unesi email',
 		'email': 'email',
 		'email_accept': 'Potvrdi',
+		'dns': 'DNS',
 	},
 };

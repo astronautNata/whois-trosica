@@ -130,13 +130,15 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
                 SizedBox(
                   height: 5,
                 ),
-                Text(
-                  subtitle ?? '',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    color: ColorsHelper.darkTextColor,
+                Flexible(
+                  child: Text(
+                    subtitle ?? '',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: ColorsHelper.darkTextColor,
+                    ),
                   ),
                 )
               ],
@@ -225,6 +227,7 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
     return Container(
       padding: EdgeInsets.only(top: 8, bottom: 20),
       color: ColorsHelper.borderColor.withOpacity(0.3),
+      width: double.infinity,
       child: Column(
         children: [
           Padding(
@@ -257,7 +260,7 @@ class _ResultCardWidgetState extends State<ResultCardWidget> {
           _buildSubtitleContent(
               t.expiration_date, widget.whois.expirationDate.toString()),
           _buildSubtitleContent(
-              'Name servers',
+              t.dns,
               widget.whois.nameservers
                   ?.fold<String>(
                       '',

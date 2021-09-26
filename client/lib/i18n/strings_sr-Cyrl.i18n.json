@@ -4,7 +4,7 @@
 "label_favorite":"Омиљено",
 "label_insert_domen": "Унесите домен",
 "home_title1": "Претражи и управљај ",
-"home_title2": "домаћим доменима",
+"home_title2": "доменима",
 "home_last_search": "ПОСЛЕДЊЕ ПРЕТРАГЕ",
 "enter_domain": "Унеси домен овде",
 "alert_turn_on":"Укључи",
@@ -29,5 +29,6 @@
 "email_not_valid": "Унета емаил адреса није исправна",
 "email_enter": "Унеси емаил",
 "email": "емаил",
-"email_accept": "Потврди"
+"email_accept": "Потврди",
+"dns": "ДНС"
 }

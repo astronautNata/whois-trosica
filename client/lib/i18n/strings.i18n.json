@@ -4,7 +4,7 @@
 "label_favorite":"Omiljeno",
 "label_insert_domen": "Unesite domen",
 "home_title1": "Pretraži i upravljaj ",
-"home_title2": "domaćim domenima",
+"home_title2": "domenima",
 "home_last_search": "POSLEDNJE PRETRAGE",
 "enter_domain": "Unesi domen ovde",
 "alert_turn_on":"Uključi",
@@ -29,7 +29,8 @@
 "email_not_valid": "Uneta email adresa nije ispravna",
 "email_accept": "Potvrdi",
 "email_enter": "Unesi email",
-"email": "email"
+"email": "email",
+"dns": "DNS"
 
 
 }

@@ -7,7 +7,7 @@ import 'package:whois_trosica/models/Failure.dart';
 class NetworkExceptionParser {
   static Failure parseException(Exception e) {
     var ex = e;
-    if (ex is DioError) {
+    if (ex is DioError && ex.error is Exception) {
       ex = ex.error;
     }
 
