@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:whois_trosica/constants/endpoints.dart';
 import 'package:whois_trosica/models/Failure.dart';
 import 'package:whois_trosica/models/WhoisResponse.dart';
 import 'package:whois_trosica/utils/exception_parser.dart';
@@ -18,15 +19,54 @@ class Network {
     try {
       final res =
           await Dio().get('http://192.168.0.29:5001/api/Search/${domen}');
-      // var map = _parseResponse(res);
-
-      // String rawJson =
-      //     '{"owner":"Individual","registrar":"mCloud doo","registrationDate":"10.03.2008 12:30:17","expirationDate":"10.03.2022 12:30:17","nameservers":["ns.bg2.ha.rs - 91.222.7.7","ns.bg3.ha.rs - 87.237.206.34","bg1.mns-dns.net -","us1.mns-dns.com -"],"completeInfo":""}';
-      // Map<String, dynamic> map = jsonDecode(rawJson);
 
       if (res.data.toString().isEmpty) throw Failure('Error');
 
       return WhoisResponse.fromJson(res.data, domen);
+    } on Exception catch (e) {
+      throw NetworkExceptionParser.parseException(e);
+    } on Failure {
+      rethrow;
+    }
+  }
+
+  Future<bool> subscribe({
+    required String domen,
+    required String token,
+    required String email,
+  }) async {
+    try {
+      final res = await Dio().post(Endpoints.WHOIS_API, queryParameters: {
+        'domain': domen,
+        'token': token,
+        'email': email,
+      });
+
+      if (res.data.toString().isEmpty) throw Failure('Error');
+
+      return true;
+    } on Exception catch (e) {
+      throw NetworkExceptionParser.parseException(e);
+    } on Failure {
+      rethrow;
+    }
+  }
+
+  Future<bool> cencelSubscription({
+    required String domen,
+    required String token,
+    required String email,
+  }) async {
+    try {
+      final res = await Dio().delete(Endpoints.WHOIS_API, queryParameters: {
+        'domain': domen,
+        'token': token,
+        'email': email,
+      });
+
+      if (res.data.toString().isEmpty) throw Failure('Error');
+
+      return true;
     } on Exception catch (e) {
       throw NetworkExceptionParser.parseException(e);
     } on Failure {

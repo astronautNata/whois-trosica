@@ -12,4 +12,5 @@ class ColorsHelper {
   static const dividerColor = Color.fromRGBO(218, 225, 231, 0.3);
   static const greenBackground = Color.fromRGBO(164, 224, 174, 0.6);
   static const historyColor = Color.fromRGBO(96, 111, 123, 0.2);
+  static const bottomSheetOverlayBackground = Color.fromRGBO(35, 41, 46, 0.87);
 }

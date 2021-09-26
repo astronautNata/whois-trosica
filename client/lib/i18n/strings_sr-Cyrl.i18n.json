@@ -6,5 +6,20 @@
 "home_title1": "Претражи и управљај ",
 "home_title2": "домаћим доменима",
 "home_last_search": "ПОСЛЕДЊЕ ПРЕТРАГЕ",
-"enter_domain": "Унеси домен овде"
+"enter_domain": "Унеси домен овде",
+"alert_turn_on":"Укључи",
+"alert_cancel":"Откажи",
+"turn_remainder":"Укључи подсетник?",
+"domain_found":"је пронађен!",
+"domain_not_found":"није пронађен!",
+"favorite_domains":"Омиљени домени",
+"domain_owner":"Власник",
+"registration_date":"Датум регистровања",
+"expiration_date":"Датум истека",
+"copied": "Копирано!",
+"raw_result": "Прикажи комплетан резултат",
+"no_internet_connection":"Нема интернет конекције",
+"cannot_find_domain":"Не можемо да пронађемо домен",
+"bad_response":"Унесите валидан домен",
+"invalid_domain":"Домен није валидан"
 }

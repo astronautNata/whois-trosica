@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:whois_trosica/constants/font.dart';
+import 'package:whois_trosica/i18n/strings.g.dart';
 import 'package:whois_trosica/stores/favorites_store.dart';
 import 'package:whois_trosica/stores/pages_store.dart';
 import 'package:whois_trosica/widgets/result_card.dart';
@@ -10,13 +11,8 @@ class FavoritePage extends StatelessWidget {
   final PagesStore pagesStore;
   const FavoritePage(this.store, this.pagesStore, {Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return _buildBody(context);
-  }
-
   Widget _buildBody(context) {
-    return SingleChildScrollView(child: _buildWhoiss(context));
+    return _buildWhoiss(context);
   }
 
   Widget _buildWhoiss(context) {
@@ -41,7 +37,7 @@ class FavoritePage extends StatelessWidget {
                       child: Icon(Icons.arrow_back)),
                 ),
                 Text(
-                  'Omiljeni domeni',
+                  t.favorite_domains,
                   style: Font.heading1,
                 ),
                 Container(
@@ -52,24 +48,34 @@ class FavoritePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                ...store.favoriteWhoiss
-                    .map(
-                      (element) => ResultCardWidget(
-                        whois: element,
-                        favClicked: () {
-                          store.toggleFavorite(element);
-                        },
-                      ),
-                    )
-                    .toList()
-              ],
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...store.favoriteWhoiss
+                      .map(
+                        (element) => ResultCardWidget(
+                          whois: element,
+                        ),
+                      )
+                      .toList()
+                ],
+              ),
             ),
           )
         ],
       );
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        pagesStore.selectPage(0);
+        return false;
+      },
+      child: _buildBody(context),
+    );
   }
 }

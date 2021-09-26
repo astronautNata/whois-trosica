@@ -6,5 +6,20 @@
 "home_title1": "Pretrazi i upravljaj ",
 "home_title2": "domacim domenima",
 "home_last_search": "POSLEDNJE PRETRAGE",
-"enter_domain": "Unesi domen ovde"
+"enter_domain": "Unesi domen ovde",
+"alert_turn_on":"Ukljuci",
+"alert_cancel":"Otkazi",
+"turn_remainder":"Ukljuci podsetnik?",
+"domain_found":"je pronadjen!",
+"domain_not_found":"nije pronadjen!",
+"favorite_domains":"Omiljeni domeni",
+"domain_owner":"Vlasnik",
+"registration_date":"Datum registrovanja",
+"expiration_date":"Datum isteka",
+"copied": "Kopirano!",
+"raw_result": "Prikaži kompletan rezultat" ,
+"no_internet_connection":"Nema internet konekcije",
+"cannot_find_domain":"Ne mozemo da pronadjemo domen",
+"bad_response":"Unesite validan domen",
+"invalid_domain":"Domen nije validan"
 }

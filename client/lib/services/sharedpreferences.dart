@@ -8,25 +8,35 @@ import 'package:whois_trosica/services/localization.dart';
 class PreferencesService {
   const PreferencesService(this._prefs);
   static const String LOCALIZATION_KEY = 'LOCALIZATION_KEY';
+  static const String WHO_IS_HISTORY = 'history';
+  static const String WHO_IS_FAVORITES = 'favorites';
+  static const String FB_TOKEN = 'FBTOKEN';
   final SharedPreferences _prefs;
-  final whoissHistory = 'history';
-  final whoissFavorites = 'favorites';
 
   set saveListOfFavoritedWhoiss(List<WhoisResponse> list) {
-    _prefs.setStringList(whoissFavorites, list.map((e) => jsonEncode(e.toJson())).toList());
+    _prefs.setStringList(
+        WHO_IS_FAVORITES, list.map((e) => jsonEncode(e.toJson())).toList());
   }
 
   List<WhoisResponse> get readListOfFavoritedWhoiss {
-    return _prefs.getStringList(whoissFavorites)?.map((e) => WhoisResponse.fromSharedJson(jsonDecode(e))).toList() ??
+    return _prefs
+            .getStringList(WHO_IS_FAVORITES)
+            ?.map((e) => WhoisResponse.fromSharedJson(jsonDecode(e)))
+            .toList() ??
         [];
   }
 
   set saveListOfHistoryWhoiss(List<WhoisResponse> list) {
-    _prefs.setStringList(whoissHistory, list.map((e) => jsonEncode(e.toJson())).toList());
+    _prefs.setStringList(
+        WHO_IS_HISTORY, list.map((e) => jsonEncode(e.toJson())).toList());
   }
 
   List<WhoisResponse> get readListOfHistorydWhoiss {
-    return _prefs.getStringList(whoissHistory)?.map((e) => WhoisResponse.fromSharedJson(jsonDecode(e))).toList() ?? [];
+    return _prefs
+            .getStringList(WHO_IS_HISTORY)
+            ?.map((e) => WhoisResponse.fromSharedJson(jsonDecode(e)))
+            .toList() ??
+        [];
   }
 
   Locales? get readPreferredLocalization {
@@ -37,6 +47,15 @@ class PreferencesService {
   }
 
   set setPreferredLocalization(Locales localization) {
-    _prefs.setString(LOCALIZATION_KEY, LocalizationPicker.stringValue(localization));
+    _prefs.setString(
+        LOCALIZATION_KEY, LocalizationPicker.stringValue(localization));
+  }
+
+  String? get fbToken {
+    return _prefs.getString(FB_TOKEN);
+  }
+
+  set fbToken(String? token) {
+    if (token != null) _prefs.setString(FB_TOKEN, token);
   }
 }

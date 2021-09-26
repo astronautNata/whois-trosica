@@ -28,6 +28,9 @@ abstract class SearchStoreBase with Store {
   String? domen;
 
   @observable
+  bool? isErrorVisible = false;
+
+  @observable
   WhoisResponse? whois;
 
   @action
@@ -35,6 +38,11 @@ abstract class SearchStoreBase with Store {
     if (text == domen) return;
     domen = text;
     await search();
+  }
+
+  @action
+  void setErrorVisibillity(bool value) {
+    isErrorVisible = value;
   }
 
   @action
