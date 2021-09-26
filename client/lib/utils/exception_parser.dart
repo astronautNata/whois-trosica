@@ -7,8 +7,11 @@ import 'package:whois_trosica/models/Failure.dart';
 class NetworkExceptionParser {
   static Failure parseException(Exception e) {
     var ex = e;
+    var error;
     if (ex is DioError && ex.error is Exception) {
       ex = ex.error;
+    } else if (ex is DioError && ex.error is String) {
+      error = ex.error;
     }
 
     if (ex is SocketException) {
@@ -19,6 +22,6 @@ class NetworkExceptionParser {
       return Failure(t.bad_response);
     }
 
-    return Failure(ex.toString());
+    return Failure(error ?? ex.toString());
   }
 }

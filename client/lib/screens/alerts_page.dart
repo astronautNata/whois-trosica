@@ -107,10 +107,19 @@ class AlertsPage extends StatelessWidget {
                           .copyWith(color: ColorsHelper.lightTextColor),
                     ),
                     Switch(
-                      activeColor: ColorsHelper.actionColor,
-                      value: store.fbEnabled,
-                      onChanged: (_) => store.toggleFB(),
-                    )
+                        activeColor: ColorsHelper.actionColor,
+                        value: store.fbEnabled,
+                        onChanged: (newValue) {
+                          if (!newValue && !store.emailEnabled) {
+                            _showDialog(context, store.email, (value) {
+                              Navigator.pop(context);
+                              store.setEmail(value);
+                              store.toggleEmail();
+                            });
+                          } else {
+                            store.toggleFB();
+                          }
+                        })
                   ],
                 ),
               ],
