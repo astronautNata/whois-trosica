@@ -9,6 +9,7 @@ import 'package:mobx/mobx.dart';
 import 'package:whois_trosica/animations/router_animation.dart';
 import 'package:whois_trosica/constants/assets.dart';
 import 'package:whois_trosica/constants/colors.dart';
+import 'package:whois_trosica/constants/domain_regex.dart';
 import 'package:whois_trosica/constants/enums.dart';
 import 'package:whois_trosica/constants/font.dart';
 import 'package:whois_trosica/i18n/strings.g.dart';
@@ -32,8 +33,8 @@ class SearchPage extends StatefulWidget {
   final languageStore;
   final pagesStore;
 
-  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore,
-      this.historyStore, this.languageStore, this.pagesStore,
+  SearchPage(this.searchStore, this.connectivityStore, this.favoriteStore, this.historyStore, this.languageStore,
+      this.pagesStore,
       {Key? key})
       : super(key: key);
 
@@ -112,6 +113,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
           _buildAnimation(),
           _buildDescription(),
           _buildSearch(),
+          _buildNotValidDomainError(),
           _buildHistory(),
         ],
       ),
@@ -127,8 +129,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
             LocaleDropDown(
               onLocaleChange: (value) {
                 languageStore.changeLanguage(value);
-                LocaleSettings.setLocale(
-                    LocalizationPicker.returnAppLocale(languageStore.locale));
+                LocaleSettings.setLocale(LocalizationPicker.returnAppLocale(languageStore.locale));
               },
               curentValue: languageStore.locale,
             ),
@@ -199,6 +200,24 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
     );
   }
 
+  Widget _buildNotValidDomainError() {
+    return Observer(
+      builder: (context) {
+        return Visibility(
+          visible: searchStore.isErrorVisible!,
+          child: Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.only(left: 20.0, bottom: 25),
+              child: Text(
+                'Not a valid domain!',
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.w400, fontSize: 13),
+                textAlign: TextAlign.left,
+              )),
+        );
+      },
+    );
+  }
+
   Widget _handleErrorMessage() {
     return Observer(
       builder: (context) {
@@ -217,8 +236,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
 
   Widget _buildSearch() {
     return Padding(
-      padding:
-          const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 25),
+      padding: const EdgeInsets.only(left: 19.0, right: 19, top: 26, bottom: 10),
       child: IntrinsicHeight(
         child: Stack(
           children: [
@@ -233,13 +251,16 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
   Widget _buildSearchForm() {
     return Container(
       child: SearchBox(
-        (value) async => {
-          await searchStore.setDomen(value),
-          Navigator.of(context)
-              .push(RouterAnimator.animateRoute(() => ResultPage(
-                    pages: pagesStore,
-                    store: searchStore,
-                  )))
+        (value) async {
+          if (!Domain.isValid(value)) {
+            searchStore.setErrorVisibillity(true);
+            return;
+          }
+          await searchStore.setDomen(value);
+          await Navigator.of(context).push(RouterAnimator.animateRoute(() => ResultPage(
+                pages: pagesStore,
+                store: searchStore,
+              )));
         },
       ),
     );
@@ -287,8 +308,7 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
                 return HistoryCard(
                   whois: historyStore.historyWhoiss[index],
                   onClick: () async {
-                    await searchStore
-                        .setDomen(historyStore.historyWhoiss[index].domen!);
+                    await searchStore.setDomen(historyStore.historyWhoiss[index].domen!);
                     pagesStore.selectPage(Pages.Result.index);
                   },
                 );

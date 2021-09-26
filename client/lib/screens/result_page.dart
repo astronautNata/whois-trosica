@@ -12,8 +12,7 @@ import 'package:whois_trosica/widgets/result_card.dart';
 class ResultPage extends StatefulWidget {
   final SearchStore store;
   final PagesStore pages;
-  const ResultPage({Key? key, required this.store, required this.pages})
-      : super(key: key);
+  const ResultPage({Key? key, required this.store, required this.pages}) : super(key: key);
 
   @override
   _ResultPageState createState() => _ResultPageState();
@@ -24,9 +23,7 @@ class _ResultPageState extends State<ResultPage> {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-              bottom: BorderSide(width: 1, color: ColorsHelper.borderColor))),
+          color: Colors.white, border: Border(bottom: BorderSide(width: 1, color: ColorsHelper.borderColor))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,16 +39,14 @@ class _ResultPageState extends State<ResultPage> {
               ),
               Text(
                 store.domen ?? '',
-                style: TextStyle(
-                    color: ColorsHelper.darkTextColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 13),
+                style: TextStyle(color: ColorsHelper.darkTextColor, fontWeight: FontWeight.w500, fontSize: 13),
               ),
             ],
           ),
           IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                widget.store.setErrorVisibillity(false);
               },
               icon: Icon(
                 FontAwesomeIcons.times,
@@ -115,6 +110,7 @@ class _ResultPageState extends State<ResultPage> {
     return WillPopScope(
       onWillPop: () async {
         widget.pages.selectPage(0);
+        widget.store.setErrorVisibillity(false);
         return false;
       },
       child: Observer(

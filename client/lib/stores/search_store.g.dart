@@ -62,6 +62,21 @@ mixin _$SearchStore on SearchStoreBase, Store {
     });
   }
 
+  final _$isErrorVisibleAtom = Atom(name: 'SearchStoreBase.isErrorVisible');
+
+  @override
+  bool? get isErrorVisible {
+    _$isErrorVisibleAtom.reportRead();
+    return super.isErrorVisible;
+  }
+
+  @override
+  set isErrorVisible(bool? value) {
+    _$isErrorVisibleAtom.reportWrite(value, super.isErrorVisible, () {
+      super.isErrorVisible = value;
+    });
+  }
+
   final _$whoisAtom = Atom(name: 'SearchStoreBase.whois');
 
   @override
@@ -91,12 +106,27 @@ mixin _$SearchStore on SearchStoreBase, Store {
     return _$searchAsyncAction.run(() => super.search());
   }
 
+  final _$SearchStoreBaseActionController =
+      ActionController(name: 'SearchStoreBase');
+
+  @override
+  void setErrorVisibillity(bool value) {
+    final _$actionInfo = _$SearchStoreBaseActionController.startAction(
+        name: 'SearchStoreBase.setErrorVisibillity');
+    try {
+      return super.setErrorVisibillity(value);
+    } finally {
+      _$SearchStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 whoisFetched: ${whoisFetched},
 searchFuture: ${searchFuture},
 domen: ${domen},
+isErrorVisible: ${isErrorVisible},
 whois: ${whois},
 isWhoisLoading: ${isWhoisLoading}
     ''';
